@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Montserrat:400,700|Muli|Nunito|Quicksand|Raleway:400,700|Spartan:400,700&display=swap');
+
+body {
+  font-family: 'Spartan', ;
+  // font-family: 'Montserrat', ;
+  // font-family: 'Raleway', ;
+  // font-family: 'Muli', ;
+  // font-family: 'Comfortaa', ;
+}
+
+div .hero-body {
+  background-image: url('https://kobietamag.pl/wp-content/uploads/2017/04/city-break-pomysly-nw-wee.jpg');
+  background-size: 1800px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roam {
+  font-size: 150px;
+  color: black;
+  text-shadow: 1px 2px 3px white;
+  font-family: 'Spartan', ;
+}
+
+.register-container {
+  margin: 50px;
+  display: flex;
+  
+}

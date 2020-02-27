@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, PopulatedUserSerializer
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -46,3 +46,12 @@ class LoginView(APIView):
 
         except User.DoesNotExist:
           raise PermissionDenied({'message': 'Invalid Credentials'})
+
+class UserDetailView(APIView):
+
+    # SHOW - PROFILE
+    def get(self, _request, pk):
+        user = User.objects.get(pk=pk) 
+        serialized_user = PopulatedUserSerializer(user)
+
+        return Response(serialized_user.data) # send the JSON

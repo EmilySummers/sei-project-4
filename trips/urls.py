@@ -9,5 +9,6 @@ urlpatterns = [
     path('<int:pk>/attractions/', AttractionListView.as_view()),
     path('<int:pk>/attractions/<int:attraction_pk>/', AttractionDetailView.as_view()),
     path('<int:pk>/to_dos/', ToDoListView.as_view()),
-    path('<int:pk>/to_dos/<int:to_do_pk>/', ToDoDetailView.as_view())
+    path('<int:pk>/to_dos/<int:to_do_pk>/', ToDoDetailView.as_view()),
+    # path('<int:pk>/attendees/', AttendeeListView.as_view())
 ]

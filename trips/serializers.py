@@ -10,6 +10,12 @@ class UserSerializer(serializers.ModelSerializer):
       model = User
       fields = ('id', 'username', 'profile_image')
 
+# class AttendeeSerializer(serializers.ModelSerializer): #! ISSUE?
+
+#     class Meta:
+#       model = User
+#       fields = ('id', 'email')
+
 class TripSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -36,7 +42,10 @@ class ToDoSerializer(serializers.ModelSerializer):
 
 class PopulatedTripSerializer(TripSerializer):
 
-  attendees = UserSerializer(many=True)
   photos = PhotoSerializer(many=True)
   attractions = AttractionSerializer(many=True)
   to_dos = ToDoSerializer(many=True)
+  owner = UserSerializer()
+  attendees = UserSerializer(many=True)
+  # attendees = AttendeeSerializer(many=True) #! OR HERE
+  # attendees = UserSerializer(many=True) #! OR HERE

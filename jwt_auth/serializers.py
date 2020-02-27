@@ -3,7 +3,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 # import django.contrib.auth.password_validation as validations
 # from django.core.exceptions import ValidationError
+from trips.models import Trip
 User = get_user_model()
+
+class TripSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = Trip
+    fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -29,3 +36,17 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+class PopulatedUserSerializer(UserSerializer):
+
+    trips = TripSerializer(many=True)
+
+# class AttendeeSerializer(serializers.ModelSerializer):
+
+#   class Meta:
+#     model = User
+#     fields = '__all__'
+
+# class PopulatedAttendeeSerializer(AttendeeSerializer):
+
+#   trips_attending = TripSerializer(many=True)

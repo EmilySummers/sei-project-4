@@ -2,14 +2,18 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Trip, Photo, Attraction, ToDo
-from .serializers import TripSerializer, PopulatedTripSerializer, PhotoSerializer, AttractionSerializer, ToDoSerializer
+
+from .serializers import TripSerializer, PopulatedTripSerializer, PhotoSerializer, AttractionSerializer, ToDoSerializer, UserSerializer
 
 #? TRIPS
 
 # COLLECTION - /trips
 class TripListView(APIView):
+
+  permission_classes = (IsAuthenticatedOrReadOnly, )
 
   # INDEX - MY TRIPS
   def get(self, _request):
@@ -21,7 +25,7 @@ class TripListView(APIView):
 
   # CREATE A NEW TRIP
   def post(self, request):
-
+    request.data['owner'] = request.user.id
     trip = TripSerializer(data=request.data)
 
     if trip.is_valid():
@@ -153,3 +157,23 @@ class ToDoDetailView(APIView):
       return Response(status=HTTP_204_NO_CONTENT)
     except ToDo.DoesNotExist:
       return Response({'message': 'Not Found'}, status=HTTP_404_NOT_FOUND)
+
+#       # COMMENT COLLECTION - /films/:id/comments
+
+# class AttendeeListView(APIView):
+
+#   # ADD AN ATTENDEE
+#   def post(self, request, pk):
+#     request.data['trip'] = pk
+
+#     email = request.data.get('email')
+#     user = User.objects.get(email=email)
+#     attendee = UserSerializer(data=user)
+
+#     if attendee.is_valid():
+#       attendee.save()
+#       trip = Trip.objects.get(pk=pk)
+#       serialized_trip = PopulatedTripSerializer(trip)
+#       return Response(serialized_trip.data, status=HTTP_201_CREATED)
+
+#     return Response(attendee.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)

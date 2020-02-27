@@ -7,9 +7,10 @@ User = get_user_model()
 class Trip(models.Model):
   destination = models.CharField(max_length=50)
   start_date = models.DateField()
-  end_date = models.DateField(blank=True, null=True)
-  completed = models.BooleanField(default=False)
-  attendees = models.ManyToManyField('jwt_auth.User', related_name='trips')
+  end_date = models.DateField()
+  completed = models.BooleanField(default=False),
+  owner = models.ForeignKey(User, related_name="trip", null=True, on_delete=models.CASCADE)
+  # attendees = models.ManyToManyField('jwt_auth.User', related_name="trips_attending", blank=True)
 
   def __str__(self):
     return self.destination
@@ -33,5 +34,4 @@ class ToDo(models.Model):
   trip = models.ForeignKey(Trip, related_name="to_dos", null=True, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f'To do {self.id} - {self.trip}'
-  
+    return f'To do {self.id} - {self.trip}'  

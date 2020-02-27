@@ -1,0 +1,160 @@
+[
+{
+  "model": "trips.trip",
+  "pk": 2,
+  "fields": {
+    "destination": "Lisbon",
+    "start_date": "2020-05-21",
+    "end_date": "2020-02-24",
+    "owner": 1
+  }
+},
+{
+  "model": "trips.trip",
+  "pk": 3,
+  "fields": {
+    "destination": "Barcelona",
+    "start_date": "2020-08-10",
+    "end_date": "2020-08-24",
+    "owner": 3
+  }
+},
+{
+  "model": "trips.trip",
+  "pk": 10,
+  "fields": {
+    "destination": "Thailand",
+    "start_date": "2020-10-01",
+    "end_date": "2020-11-01",
+    "owner": 1
+  }
+},
+{
+  "model": "trips.photo",
+  "pk": 1,
+  "fields": {
+    "image": "https://www.fodors.com/wp-content/uploads/2018/07/shutterstock_552368572.jpg",
+    "trip": 3
+  }
+},
+{
+  "model": "trips.photo",
+  "pk": 3,
+  "fields": {
+    "image": "https://cdn.tourcms.com/a/5904/982/1/large.jpg",
+    "trip": 3
+  }
+},
+{
+  "model": "trips.photo",
+  "pk": 4,
+  "fields": {
+    "image": "https://media.cntraveler.com/photos/590ca578c116ba6ca55ec67c/4:3/w_480,c_limit/sintra-pena-palace-GettyImages-482413302.jpg",
+    "trip": 2
+  }
+},
+{
+  "model": "trips.photo",
+  "pk": 5,
+  "fields": {
+    "image": "https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/Portugal/Lisbon/lisbon-lead-image.jpg",
+    "trip": 2
+  }
+},
+{
+  "model": "trips.photo",
+  "pk": 6,
+  "fields": {
+    "image": "https://www.traveldailymedia.com/assets/2018/09/Phuket-Thailand.jpg",
+    "trip": 10
+  }
+},
+{
+  "model": "trips.photo",
+  "pk": 7,
+  "fields": {
+    "image": "https://cdn2.wanderlust.co.uk/media/1032/chiang-mai-pagoda.jpg?anchor=center&mode=crop&width=1920&height=0&format=auto&quality=90&rnd=132271230980000000",
+    "trip": 10
+  }
+},
+{
+  "model": "trips.attraction",
+  "pk": 2,
+  "fields": {
+    "link": "https://www.tripadvisor.co.uk/AttractionProductReview-g187497-d11990696-Interactive_Spanish_Cooking_Experience_in_Barcelona-Barcelona_Catalonia.html",
+    "trip": 3
+  }
+},
+{
+  "model": "trips.attraction",
+  "pk": 3,
+  "fields": {
+    "link": "https://www.lisbon.net/belem-tower",
+    "trip": 2
+  }
+},
+{
+  "model": "trips.attraction",
+  "pk": 4,
+  "fields": {
+    "link": "https://www.royalgrandpalace.th/en/home",
+    "trip": 10
+  }
+},
+{
+  "model": "trips.todo",
+  "pk": 1,
+  "fields": {
+    "to_do": "Ride Tram 28",
+    "trip": 2
+  }
+},
+{
+  "model": "trips.todo",
+  "pk": 2,
+  "fields": {
+    "to_do": "eat tapas",
+    "trip": 3
+  }
+},
+{
+  "model": "trips.todo",
+  "pk": 4,
+  "fields": {
+    "to_do": "have dinner on Las Ramblas",
+    "trip": 3
+  }
+},
+{
+  "model": "trips.todo",
+  "pk": 5,
+  "fields": {
+    "to_do": "Eat Nata",
+    "trip": 2
+  }
+},
+{
+  "model": "trips.todo",
+  "pk": 6,
+  "fields": {
+    "to_do": "Visit elephant sanctuary",
+    "trip": 10
+  }
+},
+{
+  "model": "trips.todo",
+  "pk": 7,
+  "fields": {
+    "to_do": "Ride in a tuk tuk",
+    "trip": 10
+  }
+},
+{
+  "model": "trips.todo",
+  "pk": 8,
+  "fields": {
+    "to_do": "Visit a floating market",
+    "trip": 10
+  }
+}
+]
