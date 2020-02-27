@@ -1,5 +1,7 @@
 # pylint: disable=no-member
 from django.db import models
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 # Create your models here.
 class Trip(models.Model):
@@ -7,6 +9,7 @@ class Trip(models.Model):
   start_date = models.DateField()
   end_date = models.DateField(blank=True, null=True)
   completed = models.BooleanField(default=False)
+  attendees = models.ManyToManyField('jwt_auth.User', related_name='trips')
 
   def __str__(self):
     return self.destination
