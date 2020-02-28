@@ -24,7 +24,7 @@ class Navbar extends React.Component {
           {/* <Link className="navbar-item" to="/"></Link> */}
           <div className="navbar-end">
             <Link className="navbar-item" to="/trips">My Trips</Link>
-            <Link className="navbar-item" to="/trips/new">Create Trip</Link>
+            <Link className="navbar-item" to="/trips/new">Add a Trip</Link>
             <Link className="navbar-item" to="/register">Register</Link>
             <Link className="navbar-item" to="/login">Login</Link>
             <a href="/" className="navbar-item" onClick={this.handleLogout}>LOGOUT</a>

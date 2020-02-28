@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
+// import { headers } from '../../lib/headers'
 
 class TripIndex extends React.Component {
   state = {
@@ -10,7 +11,9 @@ class TripIndex extends React.Component {
 
   async getData() {
     try {
-      const res = await axios.get('/api/trips')
+      const res = await axios.get('/api/trips', {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
       const ownedTrips = res.data.filter(trip => {
         return trip.owner.id === Auth.getUser()
       })

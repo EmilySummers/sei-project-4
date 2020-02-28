@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import ImageUpload from '../ImageUpload'
-import { ReactTinyLink } from 'react-tiny-link'
+import MicrolinkCard from '@microlink/react'
+import Auth from '../../lib/auth'
 
 class TripShow extends React.Component {
   state = {
@@ -27,7 +28,9 @@ class TripShow extends React.Component {
   async getData() {
     const tripId = this.props.match.params.id
     try {
-      const res = await axios.get(`/api/trips/${tripId}`)
+      const res = await axios.get(`/api/trips/${tripId}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
       //  {
       //   headers: { Authorization: `Bearer ${Auth.getToken()}` }
       // })
@@ -64,7 +67,9 @@ class TripShow extends React.Component {
     e.preventDefault()
     const tripId = this.props.match.params.id
     try {
-      await axios.post(`/api/trips/${tripId}/to_dos/`, this.state.to_do)
+      await axios.post(`/api/trips/${tripId}/to_dos/`, this.state.to_do, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
       this.setState({ to_do: { to_do: '' } })
       this.getData()
     } catch (err) {
@@ -82,7 +87,9 @@ class TripShow extends React.Component {
     e.preventDefault()
     const tripId = this.props.match.params.id
     try {
-      await axios.post(`/api/trips/${tripId}/attractions/`, this.state.link)
+      await axios.post(`/api/trips/${tripId}/attractions/`, this.state.link, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
       this.setState({ link: { link: '' } })
       this.getData()
     } catch (err) {
@@ -100,7 +107,9 @@ class TripShow extends React.Component {
     e.preventDefault()
     const tripId = this.props.match.params.id
     try {
-      await axios.post(`/api/trips/${tripId}/photos/`, this.state.image)
+      await axios.post(`/api/trips/${tripId}/photos/`, this.state.image, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
       this.setState({ image: { image: '' }, displayImgUp: !this.state.displayImgUp })
       this.getData()
     } catch (err) {
@@ -126,7 +135,7 @@ class TripShow extends React.Component {
 
   render() {
     const { destination, start_date, end_date } = this.state.trip
-    const { photos, to_dos } = this.state
+    const { photos, attractions, to_dos } = this.state
     return (
       <div>
         <h1>{destination}</h1>
@@ -144,14 +153,7 @@ class TripShow extends React.Component {
         {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
         
         {attractions.map(attraction => (
-          <ReactTinyLink
-          key={attraction.id}
-          cardSize="small"
-          showGraphic={true}
-          maxLine={2}
-          minLine={1}
-          url={attraction.link}
-        />
+          <MicrolinkCard key={attraction.id} url={attraction.link} />
         ))}
         <form onSubmit={this.createAttraction}>
           <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>

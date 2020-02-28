@@ -1,3 +1,4 @@
+// import Auth from '../lib/auth'
 import Cookies from 'js-cookie'
 const csrftoken = Cookies.get('csrftoken')
 
@@ -6,6 +7,6 @@ export const headers = {
     'X-CSRF-TOKEN': csrftoken
   }
   // headers: {
-  //   Authorization: `Bearer ${getToken()}` // need to import auth token
+  //   Authorization: `Bearer ${Auth.getToken()}`
   // }
 }
