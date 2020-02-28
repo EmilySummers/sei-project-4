@@ -8,6 +8,8 @@ import Navbar from './components/common/Navbar'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import TripShow from './components/trips/TripShow'
+import TripIndex from './components/trips/TripIndex'
+import TripNew from './components/trips/TripNew'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/trips/:id" component={TripShow} />
+          <Route path="/trips/new" component={TripNew} />
+          <Route path="/trips" component={TripIndex} />
         </Switch>
       </>
     </BrowserRouter>

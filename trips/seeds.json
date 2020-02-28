@@ -33,7 +33,7 @@
   "model": "trips.photo",
   "pk": 1,
   "fields": {
-    "image": "https://www.fodors.com/wp-content/uploads/2018/07/shutterstock_552368572.jpg",
+    "image": "https://res.cloudinary.com/dqrkw1z1a/image/upload/v1582911725/ROAM/shutterstock_552368572_f0rmpm.jpg",
     "trip": 3
   }
 },
@@ -41,7 +41,7 @@
   "model": "trips.photo",
   "pk": 3,
   "fields": {
-    "image": "https://cdn.tourcms.com/a/5904/982/1/large.jpg",
+    "image": "https://res.cloudinary.com/dqrkw1z1a/image/upload/v1582911724/ROAM/large_jlrhkp.jpg",
     "trip": 3
   }
 },
@@ -49,7 +49,7 @@
   "model": "trips.photo",
   "pk": 4,
   "fields": {
-    "image": "https://media.cntraveler.com/photos/590ca578c116ba6ca55ec67c/4:3/w_480,c_limit/sintra-pena-palace-GettyImages-482413302.jpg",
+    "image": "https://res.cloudinary.com/dqrkw1z1a/image/upload/v1582911724/ROAM/sintra-pena-palace-GettyImages-482413302_ltmzwd.jpg",
     "trip": 2
   }
 },
@@ -57,7 +57,7 @@
   "model": "trips.photo",
   "pk": 5,
   "fields": {
-    "image": "https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/Portugal/Lisbon/lisbon-lead-image.jpg",
+    "image": "https://res.cloudinary.com/dqrkw1z1a/image/upload/v1582911725/ROAM/ezgif-3-f5b3cdb1656e_pcheqx.jpg",
     "trip": 2
   }
 },
@@ -65,7 +65,7 @@
   "model": "trips.photo",
   "pk": 6,
   "fields": {
-    "image": "https://www.traveldailymedia.com/assets/2018/09/Phuket-Thailand.jpg",
+    "image": "https://res.cloudinary.com/dqrkw1z1a/image/upload/v1582911724/ROAM/chiang-mai-pagoda_jib9wl.jpg",
     "trip": 10
   }
 },
@@ -73,7 +73,7 @@
   "model": "trips.photo",
   "pk": 7,
   "fields": {
-    "image": "https://cdn2.wanderlust.co.uk/media/1032/chiang-mai-pagoda.jpg?anchor=center&mode=crop&width=1920&height=0&format=auto&quality=90&rnd=132271230980000000",
+    "image": "https://res.cloudinary.com/dqrkw1z1a/image/upload/v1582911725/ROAM/Phuket-Thailand_ylhjwl.jpg",
     "trip": 10
   }
 },

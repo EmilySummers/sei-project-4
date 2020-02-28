@@ -3,27 +3,32 @@ import axios from 'axios'
 
 class ImageUpload extends React.Component {
   state = {
-    profile_image: null
+    image: null
   }
 
   handleUpload = async ({ target: { files } }) => {
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'afar9d6z')
+    data.append('upload_preset', 'j4ev6wv3')
     const res = await axios.post('https://api.cloudinary.com/v1_1/dqrkw1z1a/image/upload', data)
-    this.setState({ profile_image: res.data.url }, () => {
+    this.setState({ image: res.data.url }, () => {
       this.props.handleChange({ target: { name: this.props.fieldName, value: res.data.url } })
     })
   }
 
+  // clearPhoto = () => {
+    
+  // }
+
   render() {
     const labelClass = this.props.labelClassName ? this.props.labelClassName : 'default_class'
-    const { profile_image } = this.state
+    const displayImgUp = this.props.displayImgUp
+    const { image } = this.state
     return (
       <>
-        {profile_image ?      
+        {image && displayImgUp ?      
           <div>
-            <img src={profile_image} alt="profile"/>
+            <img src={image} alt="profile"/>
           </div>
           :
           <>

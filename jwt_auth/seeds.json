@@ -13,7 +13,7 @@
     "is_active": true,
     "date_joined": "2020-02-27T00:39:01.753Z",
     "email": "emily@email.com",
-    "profile_image": "https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
+    "image": "https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     "groups": [],
     "user_permissions": [],
     "trips": []
@@ -33,7 +33,7 @@
     "is_active": true,
     "date_joined": "2020-02-27T00:43:43.342Z",
     "email": "admin@email.com",
-    "profile_image": "",
+    "image": "",
     "groups": [],
     "user_permissions": [],
     "trips": []
@@ -53,7 +53,7 @@
     "is_active": true,
     "date_joined": "2020-02-27T11:29:05.377Z",
     "email": "jess@email.com",
-    "profile_image": "jess-profile-image",
+    "image": "jess-profile-image",
     "groups": [],
     "user_permissions": [],
     "trips": []
@@ -73,7 +73,7 @@
     "is_active": true,
     "date_joined": "2020-02-27T12:40:13Z",
     "email": "matt@email.com",
-    "profile_image": "matt-profile-image",
+    "image": "matt-profile-image",
     "groups": [],
     "user_permissions": [],
     "trips": []

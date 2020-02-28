@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import ImageUpload from '../ImageUpload'
+import { ReactTinyLink } from 'react-tiny-link'
 
 class TripShow extends React.Component {
   state = {
@@ -7,8 +9,19 @@ class TripShow extends React.Component {
     start_date: '',
     end_date: '',
     photos: [],
+    image: {
+      image: ''
+    },
+    displayImgUp: false,
     attractions: [],
-    to_dos: []
+    link: {
+      link: ''
+    },
+    to_dos: [],
+    to_do: {
+      to_do: ''
+    },
+    errors: {}
   }
 
   async getData() {
@@ -36,16 +49,65 @@ class TripShow extends React.Component {
     this.getData()
   }
 
-  // async addPhoto() {
-  //   const tripId = this.props.match.params.id
-  //   try {
-  //     const res = await axios.post(`/api/trips/${tripId}/photos`)
-  //     this.setState({})
-  //   } catch (err) {
-  //     console.log(err)
-  //     // this.props.history.push('/notfound')
-  //   }
-  // }
+  handleChange = e => {
+    const data = { ...this.state.data, [e.target.name]: e.target.value }
+    const errors = { ...this.state.errors, [e.target.name]: '' }
+    this.setState({ data, errors })
+  }
+
+  handleToDo = e => {
+    const to_do = { [e.target.name]: e.target.value }
+    this.setState({ to_do })
+  }
+
+  createToDo = async e => {
+    e.preventDefault()
+    const tripId = this.props.match.params.id
+    try {
+      await axios.post(`/api/trips/${tripId}/to_dos/`, this.state.to_do)
+      this.setState({ to_do: { to_do: '' } })
+      this.getData()
+    } catch (err) {
+      console.log(err)
+      // this.props.history.push('/notfound')
+    }
+  }
+
+  handleAttraction = e => {
+    const link = { [e.target.name]: e.target.value }
+    this.setState({ link })
+  }
+
+  createAttraction = async e => {
+    e.preventDefault()
+    const tripId = this.props.match.params.id
+    try {
+      await axios.post(`/api/trips/${tripId}/attractions/`, this.state.link)
+      this.setState({ link: { link: '' } })
+      this.getData()
+    } catch (err) {
+      console.log(err)
+      // this.props.history.push('/notfound')
+    }
+  }
+
+  handlePhoto = e => {
+    const image = { [e.target.name]: e.target.value }
+    this.setState({ image, displayImgUp: !this.state.displayImgUp })
+  }
+
+  createPhoto = async e => {
+    e.preventDefault()
+    const tripId = this.props.match.params.id
+    try {
+      await axios.post(`/api/trips/${tripId}/photos/`, this.state.image)
+      this.setState({ image: { image: '' }, displayImgUp: !this.state.displayImgUp })
+      this.getData()
+    } catch (err) {
+      console.log(err)
+      // this.props.history.push('/notfound')
+    }
+  }
 
   formatDate(date) {
     var monthNames = [
@@ -64,17 +126,44 @@ class TripShow extends React.Component {
 
   render() {
     const { destination, start_date, end_date } = this.state.trip
-    const { photos, attractions, to_dos } = this.state
+    const { photos, to_dos } = this.state
     return (
       <div>
         <h1>{destination}</h1>
         <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
         {photos.map(photo => <img className="board-photo" key={photo.id} src={photo.image} alt="" />)}
-        <button onClick={this.addPhoto} className="button">Add photo</button>
-        {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)}
+        <form onSubmit={this.createPhoto}>
+          <ImageUpload
+            handleChange={this.handlePhoto}
+            clearPhoto={this.clearPhoto}
+            fieldName="image"
+            displayImgUp={this.state.displayImgUp}
+          />
+          <button className="button">Pin photo</button>
+        </form>
+        {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
+        
+        {attractions.map(attraction => (
+          <ReactTinyLink
+          key={attraction.id}
+          cardSize="small"
+          showGraphic={true}
+          maxLine={2}
+          minLine={1}
+          url={attraction.link}
+        />
+        ))}
+        <form onSubmit={this.createAttraction}>
+          <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
+          <button className="button">Add attraction</button>
+        </form>
         <ul>
           {to_dos.map(task => <li key={task.id}>{task.to_do}</li>)}
         </ul>
+        <form onSubmit={this.createToDo}>
+          <input className="input" onChange={this.handleToDo} placeholder="New task" name="to_do" value={this.state.to_do.to_do}></input>
+          <button className="button">Add task</button>
+        </form>
       </div>
     )
   }

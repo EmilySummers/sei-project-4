@@ -7,7 +7,7 @@ class Register extends React.Component {
     data: {
       username: '',
       email: '',
-      profile_image: '',
+      image: '',
       password: '',
       password_confirmation: ''
     },
@@ -73,8 +73,7 @@ class Register extends React.Component {
             </div>
             <ImageUpload
               handleChange={this.handleChange}
-              fieldName="profile_image"
-              inputClassName="my-input-class"
+              fieldName="image"
             />
             <button className="button is-info">Start Roaming</button>
           </form>

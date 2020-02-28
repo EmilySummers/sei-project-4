@@ -40,7 +40,7 @@ class Login extends React.Component {
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" onChange={this.handleChange} placeholder="Password" name="password"></input>
+              <input className="input" onChange={this.handleChange} placeholder="Password" name="password" type="password"></input>
             </div>
           </div>
           <button className="button is-info">Login</button>
