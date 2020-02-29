@@ -12,6 +12,12 @@ class TripSerializer(serializers.ModelSerializer):
     model = Trip
     fields = '__all__'
 
+# class JoinTripSerializer(serializers.ModelSerializer):
+
+#   class Meta:
+#     model = Trip
+#     fields = 
+
 class UserSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)

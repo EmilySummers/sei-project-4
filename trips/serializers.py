@@ -10,12 +10,6 @@ class UserSerializer(serializers.ModelSerializer):
       model = User
       fields = ('id', 'username', 'image')
 
-# class AttendeeSerializer(serializers.ModelSerializer): #! ISSUE?
-
-#     class Meta:
-#       model = User
-#       fields = ('id', 'email')
-
 class TripSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -47,5 +41,10 @@ class PopulatedTripSerializer(TripSerializer):
   to_dos = ToDoSerializer(many=True)
   owner = UserSerializer()
   attendees = UserSerializer(many=True)
-  # attendees = AttendeeSerializer(many=True) #! OR HERE
-  # attendees = UserSerializer(many=True) #! OR HERE
+
+class EditTripSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Trip
+        fields = '__all__'
+        extra_kwargs = {'destination': {'required': False}, 'start_date': {'required': False}, 'end_date': {'required': False}} 

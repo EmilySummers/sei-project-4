@@ -24,7 +24,7 @@ class ProfileEdit extends React.Component {
     e.preventDefault()
     const userId = this.state.data.id
     try {
-      const res = await axios.put(`/api/${userId}/`, this.state.data, {
+      await axios.put(`/api/${userId}/`, this.state.data, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       this.props.history.push('/profile')

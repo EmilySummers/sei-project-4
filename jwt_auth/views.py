@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
-from .serializers import UserSerializer, PopulatedUserSerializer, EditUserSerializer
+from .serializers import UserSerializer, PopulatedUserSerializer, EditUserSerializer, TripSerializer
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -70,7 +70,6 @@ class UserDetailView(APIView):
     # EDIT USER/PROFILE
     def put(self, request, pk):
         user = User.objects.get(pk=pk)
-        print(user)
         updated_user = EditUserSerializer(user, data=request.data)
         # print(updated_user)
         if updated_user.is_valid():
@@ -87,3 +86,14 @@ class ProfileView(APIView):
         serialized_user = UserSerializer(user)
         return Response(serialized_user.data)
 
+class TripListView(APIView):
+
+    def post(self, request, pk):
+        # # user = User.objects.get(pk=request.user.id)
+        # serialized_trip = TripSerializer(data=request.data)
+        # if serialized_trip.is_valid():
+        #   request.user.trips.append(serialized_trip)
+        #   return Response(request.user)
+        # return Response(serialized_trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+        request.data['attendees'] = request.user.id
+        print(request.data)

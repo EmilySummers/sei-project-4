@@ -24,7 +24,7 @@ class TripNew extends React.Component {
       const res = await axios.post('/api/trips/', this.state.data, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      this.props.history.push(`/trips/${res.data.id}`)
+      this.props.history.push(`/mytrips/${res.data.id}`)
     } catch (err) {
       this.setState({ errors: err.response.data })
     }

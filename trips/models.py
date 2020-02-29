@@ -11,7 +11,7 @@ class Trip(models.Model):
   destination = models.CharField(max_length=50)
   start_date = models.DateField()
   end_date = models.DateField()
-  public = models.BooleanField(default=False)
+  open_trip = models.BooleanField(default=False)
   owner = models.ForeignKey(User, related_name="trip", null=True, on_delete=models.CASCADE)
   # attendees = models.ManyToManyField('jwt_auth.User', related_name="trips_attending", blank=True)
 

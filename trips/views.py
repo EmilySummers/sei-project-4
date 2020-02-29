@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Trip, Photo, Attraction, ToDo
 
-from .serializers import TripSerializer, PopulatedTripSerializer, PhotoSerializer, AttractionSerializer, ToDoSerializer, UserSerializer
+from .serializers import TripSerializer, PopulatedTripSerializer, PhotoSerializer, AttractionSerializer, ToDoSerializer, UserSerializer, EditTripSerializer
 
 #? TRIPS
 
@@ -45,6 +45,15 @@ class TripDetailView(APIView):
 
         return Response(serialized_trip.data) # send the JSON
 
+    # EDIT A TRIP
+    def put(self, request, pk):
+        trip = Trip.objects.get(pk=pk) 
+        updated_trip = EditTripSerializer(trip, data=request.data)
+        if updated_trip.is_valid():
+            updated_trip.save()
+            return Response(updated_trip.data)
+        return Response(updated_trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
     # DELETE A TRIP
     def delete(self, _request, pk):
     
@@ -54,7 +63,6 @@ class TripDetailView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
       except Trip.DoesNotExist:
         return Response({'message': 'Not Found'}, status=HTTP_404_NOT_FOUND)
-
 
 #? PHOTOS
 

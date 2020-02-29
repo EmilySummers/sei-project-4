@@ -4,7 +4,7 @@ import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 // import { headers } from '../../lib/headers'
 
-class TripIndex extends React.Component {
+class MyTripIndex extends React.Component {
   state = {
     upcoming_trips: [],
     past_trips: []
@@ -71,12 +71,12 @@ class TripIndex extends React.Component {
         <h2 className="title">Upcoming Trips</h2>
         {upcoming_trips.map(trip => (
           <div className="box" key={trip.id}>
-            <Link to={`/trips/${trip.id}`}>
+            <Link to={`/mytrips/${trip.id}`}>
               <div className="media">
                 {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
                 <div className="info">
                   <h2 className="title">{trip.destination}</h2>
-                  <h4>{() => this.formatDate(new Date(trip.start_date))} - {() => this.formatDate(new Date(trip.end_date))}</h4>
+                  <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
                 </div>
               </div>
             </Link>
@@ -86,12 +86,12 @@ class TripIndex extends React.Component {
         <h2 className="title">Past Trips</h2>
         {past_trips.map(trip => (
           <div className="box" key={trip.id}>
-            <Link to={`/trips/${trip.id}`}>
+            <Link to={`/mytrips/${trip.id}`}>
               <div className="media">
                 {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
                 <div className="info">
                   <h2 className="title">{trip.destination}</h2>
-                  <h4>{() => this.formatDate(new Date(trip.start_date))} - {() => this.formatDate(new Date(trip.end_date))}</h4>
+                  <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
                 </div>
               </div>
             </Link>
@@ -103,4 +103,4 @@ class TripIndex extends React.Component {
   }
 }
 
-export default TripIndex
+export default MyTripIndex

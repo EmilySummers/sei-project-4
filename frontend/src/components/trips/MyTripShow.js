@@ -4,24 +4,17 @@ import ImageUpload from '../ImageUpload'
 import MicrolinkCard from '@microlink/react'
 import Auth from '../../lib/auth'
 
-class TripShow extends React.Component {
+class MyTripShow extends React.Component {
   state = {
     trip: {},
-    start_date: '',
-    end_date: '',
     photos: [],
-    image: {
-      image: ''
-    },
+    image: { image: '' },
     displayImgUp: false,
     attractions: [],
-    link: {
-      link: ''
-    },
+    link: { link: '' },
     to_dos: [],
-    to_do: {
-      to_do: ''
-    },
+    to_do: { to_do: '' },
+    data: { open_trip: false },
     errors: {}
   }
 
@@ -31,16 +24,12 @@ class TripShow extends React.Component {
       const res = await axios.get(`/api/trips/${tripId}`, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      //  {
-      //   headers: { Authorization: `Bearer ${Auth.getToken()}` }
-      // })
       this.setState({
         trip: res.data,
-        start_date: res.data.start_date,
-        end_date: res.data.end_date,
         photos: res.data.photos,
         attractions: res.data.attractions,
-        to_dos: res.data.to_dos
+        to_dos: res.data.to_dos,
+        data: { open_trip: res.data.open_trip}
       })
     } catch (err) {
       console.log(err)
@@ -169,11 +158,35 @@ class TripShow extends React.Component {
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
 
+  toggleStatus = () => {
+    this.setState({ data: { open_trip: !this.state.data.open_trip} }, () => {
+      this.editTrip()
+    })
+  }
+
+  editTrip = async() => {
+    const tripId = this.props.match.params.id
+    try {
+      await axios.put(`/api/trips/${tripId}/`, this.state.data, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      }, () => {
+        this.getData()
+      })
+    } catch (err) {
+      this.setState({ errors: err.response.data })
+    }
+  }
+
   render() {
     const { destination, start_date, end_date } = this.state.trip
     const { photos, attractions, to_dos } = this.state
     return (
       <div>
+        {this.state.data.open_trip ?
+          <button onClick={this.toggleStatus} className="button">Close Trip</button>
+          :
+          <button onClick={this.toggleStatus} className="button">Open Trip</button>
+        }
         <h1>{destination}</h1>
         <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
         {photos.map(photo => (
@@ -191,7 +204,6 @@ class TripShow extends React.Component {
           <button className="button">Pin photo</button>
         </form>
         {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
-
         {attractions.map(attraction => (
           <div key={attraction.id}>
             <MicrolinkCard url={attraction.link} />
@@ -214,10 +226,9 @@ class TripShow extends React.Component {
           <input className="input" onChange={this.handleToDo} placeholder="New task" name="to_do" value={this.state.to_do.to_do}></input>
           <button className="button">Add task</button>
         </form>
-
       </div>
     )
   }
 }
 
-export default TripShow
+export default MyTripShow
