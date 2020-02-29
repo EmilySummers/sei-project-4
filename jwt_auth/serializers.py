@@ -41,6 +41,13 @@ class PopulatedUserSerializer(UserSerializer):
 
     trips = TripSerializer(many=True)
 
+class EditUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = '__all__'
+        extra_kwargs = {'password': {'required': False}, 'image': {'required': False}, 'email': {'required': False}, 'username': {'required': False}} 
+
 # class AttendeeSerializer(serializers.ModelSerializer):
 
 #   class Meta:

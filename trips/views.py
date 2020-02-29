@@ -28,10 +28,12 @@ class TripListView(APIView):
     request.data['owner'] = request.user.id
     trip = TripSerializer(data=request.data)
 
-    if trip.is_valid():
-      trip.save()
-      return Response(trip.data, status=HTTP_201_CREATED)
-    return Response(trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+    if request.data['end_date'] > request.data['start_date']:
+      if trip.is_valid():
+        trip.save()
+        return Response(trip.data, status=HTTP_201_CREATED)
+      return Response(trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY) 
+    return Response({'message': 'End date is before start date'}, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 # MEMBER - /trips/:id
 class TripDetailView(APIView): 

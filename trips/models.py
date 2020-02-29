@@ -2,14 +2,16 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
+# from django.core.exceptions import ValidationError
 User = get_user_model()
+
 
 # Create your models here.
 class Trip(models.Model):
   destination = models.CharField(max_length=50)
   start_date = models.DateField()
   end_date = models.DateField()
-  completed = models.BooleanField(default=False),
+  public = models.BooleanField(default=False)
   owner = models.ForeignKey(User, related_name="trip", null=True, on_delete=models.CASCADE)
   # attendees = models.ManyToManyField('jwt_auth.User', related_name="trips_attending", blank=True)
 

@@ -26,12 +26,12 @@ class TripNew extends React.Component {
       })
       this.props.history.push(`/trips/${res.data.id}`)
     } catch (err) {
-      console.log(err)
-      // this.setState({ errors: err.response.data.errors })
+      this.setState({ errors: err.response.data })
     }
   }
 
   render() {
+    console.log(this.state.errors)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -48,8 +48,14 @@ class TripNew extends React.Component {
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" onChange={this.handleChange} placeholder="To" name="end_date" type="date"></input>
+              <input
+              className={this.state.errors.message ? 'input is-danger' : 'input'}
+              onChange={this.handleChange}
+              placeholder="To"
+              name="end_date"
+              type="date" />
             </div>
+            {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
           </div>
           <button className="button">Add Trip</button>
         </form>

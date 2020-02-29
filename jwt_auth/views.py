@@ -2,12 +2,13 @@ from datetime import datetime, timedelta # imported from python
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.status import HTTP_422_UNPROCESSABLE_ENTITY
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.status import HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
-from .serializers import UserSerializer, PopulatedUserSerializer
+from .serializers import UserSerializer, PopulatedUserSerializer, EditUserSerializer
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -49,9 +50,40 @@ class LoginView(APIView):
 
 class UserDetailView(APIView):
 
+    permission_classes = (IsAuthenticated, )
+
     # SHOW - PROFILE
     def get(self, _request, pk):
         user = User.objects.get(pk=pk) 
         serialized_user = PopulatedUserSerializer(user)
 
         return Response(serialized_user.data) # send the JSON
+
+    # DELETE USER
+    def delete(self, _request, pk):
+      user = User.objects.get(pk=pk)
+      user.delete()
+      return Response(status=HTTP_204_NO_CONTENT)
+      # except User.DoesNotExist:
+      #   return Response({'message': 'Not Found'}, status=HTTP_404_NOT_FOUND)
+
+    # EDIT USER/PROFILE
+    def put(self, request, pk):
+        user = User.objects.get(pk=pk)
+        print(user)
+        updated_user = EditUserSerializer(user, data=request.data)
+        # print(updated_user)
+        if updated_user.is_valid():
+            updated_user.save()
+            return Response(updated_user.data)
+        return Response(updated_user.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+class ProfileView(APIView):
+
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, request):
+        user = User.objects.get(pk=request.user.id)
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
+

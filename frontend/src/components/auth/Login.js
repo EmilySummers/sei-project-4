@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { notify } from 'react-notify-toast'
 import Auth from '../../lib/auth'
 
 class Login extends React.Component {
@@ -12,6 +13,7 @@ class Login extends React.Component {
   }
 
   handleChange = e => {
+    e.target.className = 'input'
     const data = { ...this.state.data, [e.target.name]: e.target.value }
     const errors = { ...this.state.errors, [e.target.name]: '' }
     this.setState({ data, errors })
@@ -22,6 +24,7 @@ class Login extends React.Component {
     try {
       const res = await axios.post('/api/login', this.state.data)
       Auth.setToken(res.data.token)
+      notify.show(res.data.message, 'success', 3000)
       this.props.history.push('/')
     } catch (err) {
       this.setState({ error: 'Invalid Credentials' })
@@ -35,13 +38,23 @@ class Login extends React.Component {
           <h1 className="title">Login</h1>
           <div className="field">
             <div className="control">
-              <input className="input" onChange={this.handleChange} placeholder="Email" name="email"></input>
+              <input
+              className={this.state.error ? 'input is-danger' : 'input'}
+              onChange={this.handleChange}
+              placeholder="Email"
+              name="email" />
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" onChange={this.handleChange} placeholder="Password" name="password" type="password"></input>
+              <input
+              className={this.state.error ? 'input is-danger' : 'input'}
+              onChange={this.handleChange}
+              placeholder="Password"
+              name="password"
+              type="password" />
             </div>
+            {this.state.error && <small className="help is-danger">{this.state.error}</small>}
           </div>
           <button className="button is-info">Login</button>
         </form>

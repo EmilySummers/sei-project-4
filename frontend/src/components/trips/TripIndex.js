@@ -6,10 +6,14 @@ import { Link } from 'react-router-dom'
 
 class TripIndex extends React.Component {
   state = {
-    trips: []
+    upcoming_trips: [],
+    past_trips: []
   }
 
   async getData() {
+    const upcoming_trips = []
+    const past_trips = []
+    const today = new Date()
     try {
       const res = await axios.get('/api/trips', {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -17,7 +21,14 @@ class TripIndex extends React.Component {
       const ownedTrips = res.data.filter(trip => {
         return trip.owner.id === Auth.getUser()
       })
-      this.setState({ trips: ownedTrips })
+      ownedTrips.filter(trip => {
+        if (new Date(trip.end_date) < today) {
+          past_trips.push(trip)
+        } else {
+          upcoming_trips.push(trip)
+        }
+      })
+      this.setState({ upcoming_trips, past_trips })
     } catch (err) {
       console.log(err)
     }
@@ -54,16 +65,33 @@ class TripIndex extends React.Component {
   }
 
   render() {
+    const { upcoming_trips, past_trips } = this.state
     return (
       <>
-        {this.state.trips.map(trip => (
+        <h2 className="title">Upcoming Trips</h2>
+        {upcoming_trips.map(trip => (
           <div className="box" key={trip.id}>
             <Link to={`/trips/${trip.id}`}>
               <div className="media">
                 {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
                 <div className="info">
                   <h2 className="title">{trip.destination}</h2>
-                  <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
+                  <h4>{() => this.formatDate(new Date(trip.start_date))} - {() => this.formatDate(new Date(trip.end_date))}</h4>
+                </div>
+              </div>
+            </Link>
+            <button className="button" onClick={() => this.handleDelete(trip)}>Delete trip</button>
+          </div>
+        ))}
+        <h2 className="title">Past Trips</h2>
+        {past_trips.map(trip => (
+          <div className="box" key={trip.id}>
+            <Link to={`/trips/${trip.id}`}>
+              <div className="media">
+                {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
+                <div className="info">
+                  <h2 className="title">{trip.destination}</h2>
+                  <h4>{() => this.formatDate(new Date(trip.start_date))} - {() => this.formatDate(new Date(trip.end_date))}</h4>
                 </div>
               </div>
             </Link>

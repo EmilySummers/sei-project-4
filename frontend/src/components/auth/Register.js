@@ -1,6 +1,7 @@
 import React from 'react'
 import ImageUpload from '../ImageUpload'
 import axios from 'axios'
+import { notify } from 'react-notify-toast'
 
 class Register extends React.Component {
   state = {
@@ -23,15 +24,16 @@ class Register extends React.Component {
   handleSubmit = async e => {
     e.preventDefault()
     try {
-      await axios.post('/api/register', this.state.data)
+      const res = await axios.post('/api/register', this.state.data)
+      notify.show(res.data.message, 'success', 3000)
       this.props.history.push('/login')
     } catch (err) {
-      this.setState({ errors: err.response.data.errors })
+      this.setState({ errors: err.response.data })
     }
   }
 
   render() {
-    console.log(this.state.data)
+    console.log(this.state.errors)
     return (
       <section className="register-page">
         <div className="register-container">
@@ -49,25 +51,48 @@ class Register extends React.Component {
               <div className="column">
                 <div className="field">
                   <div className="control">
-                    <input className="input" onChange={this.handleChange} placeholder="Name" name="username"></input>
+                    <input
+                      className={this.state.errors.username ? 'input is-danger' : 'input'}
+                      onChange={this.handleChange}
+                      placeholder="Username"
+                      name="username"
+                    />
                   </div>
+                  {this.state.errors.username && <small className="help is-danger">{this.state.errors.username}</small>}
                 </div>
                 <div className="field">
                   <div className="control">
-                    <input className="input" onChange={this.handleChange} placeholder="Email" name="email"></input>
+                    <input
+                    className={this.state.errors.email ? 'input is-danger' : 'input'}
+                    onChange={this.handleChange}
+                    placeholder="Email"
+                    name="email" />
                   </div>
                 </div>
+                {this.state.errors.email && <small className="help is-danger">{this.state.errors.email}</small>}
               </div>
               <div className="column">
                 <div className="field">
                   <div className="control">
-                    <input className="input" onChange={this.handleChange} placeholder="Password" type="password" name="password"></input>
+                    <input
+                    className={this.state.errors.password ? 'input is-danger' : 'input'}
+                    onChange={this.handleChange}
+                    placeholder="Password"
+                    type="password"
+                    name="password" />
                   </div>
+                  {this.state.errors.password && <small className="help is-danger">{this.state.errors.password}</small>}
                 </div>
                 <div className="field">
                   <div className="control">
-                    <input className="input" onChange={this.handleChange} placeholder="Confirm Password" type="password" name="password_confirmation"></input>
+                    <input
+                    className={this.state.errors.password_confirmation ? 'input is-danger' : 'input'}
+                    onChange={this.handleChange}
+                    placeholder="Confirm Password"
+                    type="password"
+                    name="password_confirmation" />
                   </div>
+                  {this.state.errors.password_confirmation && <small className="help is-danger">{this.state.errors.password_confirmation}</small>}
                 </div>
               </div>
             </div>
