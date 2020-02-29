@@ -23,6 +23,17 @@ class TripIndex extends React.Component {
     }
   }
 
+  handleDelete = async trip => {
+    try {
+      await axios.delete(`/api/trips/${trip.id}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.getData()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   componentDidMount() {
     this.getData()
   }
@@ -46,8 +57,8 @@ class TripIndex extends React.Component {
     return (
       <>
         {this.state.trips.map(trip => (
-          <Link to={`/trips/${trip.id}`} key={trip.id}>
-            <div className="box">
+          <div className="box" key={trip.id}>
+            <Link to={`/trips/${trip.id}`}>
               <div className="media">
                 {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
                 <div className="info">
@@ -55,8 +66,9 @@ class TripIndex extends React.Component {
                   <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+            <button className="button" onClick={() => this.handleDelete(trip)}>Delete trip</button>
+          </div>
         ))}
       </>
     )

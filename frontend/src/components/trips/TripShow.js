@@ -78,6 +78,18 @@ class TripShow extends React.Component {
     }
   }
 
+  handleDeleteToDo = async task => {
+    const tripId = this.props.match.params.id
+    try {
+      await axios.delete(`/api/trips/${tripId}/to_dos/${task.id}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.getData()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   handleAttraction = e => {
     const link = { [e.target.name]: e.target.value }
     this.setState({ link })
@@ -98,6 +110,18 @@ class TripShow extends React.Component {
     }
   }
 
+  handleDeleteAttraction = async attraction => {
+    const tripId = this.props.match.params.id
+    try {
+      await axios.delete(`/api/trips/${tripId}/attractions/${attraction.id}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.getData()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   handlePhoto = e => {
     const image = { [e.target.name]: e.target.value }
     this.setState({ image, displayImgUp: !this.state.displayImgUp })
@@ -115,6 +139,18 @@ class TripShow extends React.Component {
     } catch (err) {
       console.log(err)
       // this.props.history.push('/notfound')
+    }
+  }
+
+  handleDeletePhoto = async photo => {
+    const tripId = this.props.match.params.id
+    try {
+      await axios.delete(`/api/trips/${tripId}/photos/${photo.id}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.getData()
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -140,32 +176,45 @@ class TripShow extends React.Component {
       <div>
         <h1>{destination}</h1>
         <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
-        {photos.map(photo => <img className="board-photo" key={photo.id} src={photo.image} alt="" />)}
+        {photos.map(photo => (
+          <div key={photo.id}>
+            <img className="board-photo" src={photo.image} alt="" />
+            <button className="button" onClick={() => this.handleDeletePhoto(photo)}>Delete photo</button>
+          </div>
+        ))}
         <form onSubmit={this.createPhoto}>
           <ImageUpload
             handleChange={this.handlePhoto}
-            clearPhoto={this.clearPhoto}
             fieldName="image"
             displayImgUp={this.state.displayImgUp}
           />
           <button className="button">Pin photo</button>
         </form>
         {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
-        
+
         {attractions.map(attraction => (
-          <MicrolinkCard key={attraction.id} url={attraction.link} />
+          <div key={attraction.id}>
+            <MicrolinkCard url={attraction.link} />
+            <button className="button" onClick={() => this.handleDeleteAttraction(attraction)}>Delete link</button>
+          </div>
         ))}
         <form onSubmit={this.createAttraction}>
           <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
           <button className="button">Add attraction</button>
         </form>
         <ul>
-          {to_dos.map(task => <li key={task.id}>{task.to_do}</li>)}
+          {to_dos.map(task => (
+            <div key={task.id}>
+              <li>{task.to_do}</li>
+              <button className="button" onClick={() => this.handleDeleteToDo(task)}>Delete task</button>
+            </div>
+          ))}
         </ul>
         <form onSubmit={this.createToDo}>
           <input className="input" onChange={this.handleToDo} placeholder="New task" name="to_do" value={this.state.to_do.to_do}></input>
           <button className="button">Add task</button>
         </form>
+
       </div>
     )
   }

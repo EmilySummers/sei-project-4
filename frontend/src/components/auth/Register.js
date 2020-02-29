@@ -74,6 +74,7 @@ class Register extends React.Component {
             <ImageUpload
               handleChange={this.handleChange}
               fieldName="image"
+              displayImgUp={true}
             />
             <button className="button is-info">Start Roaming</button>
           </form>
