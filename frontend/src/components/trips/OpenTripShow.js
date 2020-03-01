@@ -14,7 +14,17 @@ class OpenTripShow extends React.Component {
     to_dos: [],
     to_do: { to_do: '' },
     data: { open_trip: false },
-    errors: {}
+    errors: {},
+    tripData: { attendees: [] },
+    currentUser: {
+      id: null,
+      username: '',
+      image: ''
+    }
+    // tripData: { trips: [] }
+    // trips: [],
+    // joinTrip: { id: null, destination: '' }
+
   }
 
   async getData() {
@@ -28,6 +38,8 @@ class OpenTripShow extends React.Component {
         photos: res.data.photos,
         attractions: res.data.attractions,
         to_dos: res.data.to_dos,
+        tripData: { attendees: res.data.attendees },
+        // joinTrip: { id: res.data.id, destination: res.data.destination },
         data: { open_trip: res.data.open_trip }
       })
     } catch (err) {
@@ -36,111 +48,22 @@ class OpenTripShow extends React.Component {
     }
   }
 
+  // async getUserTrips() {
+  //   try {
+  //     const { data } = await axios.get('/api/profile', {
+  //       headers: { Authorization: `Bearer ${Auth.getToken()}` }
+  //     })
+  //     this.setState({ tripData: { trips: data.trips} })
+  //   } catch (err) {
+  //     console.log(err)
+  //     // this.props.history.push('/notfound')
+  //   }
+  // }
+
   componentDidMount() {
     this.getData()
+    // this.getUserTrips()
   }
-
-  // handleChange = e => {
-  //   const data = { ...this.state.data, [e.target.name]: e.target.value }
-  //   const errors = { ...this.state.errors, [e.target.name]: '' }
-  //   this.setState({ data, errors })
-  // }
-
-  // handleToDo = e => {
-  //   const to_do = { [e.target.name]: e.target.value }
-  //   this.setState({ to_do })
-  // }
-
-  // createToDo = async e => {
-  //   e.preventDefault()
-  //   const tripId = this.props.match.params.id
-  //   try {
-  //     await axios.post(`/api/trips/${tripId}/to_dos/`, this.state.to_do, {
-  //       headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //     })
-  //     this.setState({ to_do: { to_do: '' } })
-  //     this.getData()
-  //   } catch (err) {
-  //     console.log(err)
-  //     // this.props.history.push('/notfound')
-  //   }
-  // }
-
-  // handleDeleteToDo = async task => {
-  //   const tripId = this.props.match.params.id
-  //   try {
-  //     await axios.delete(`/api/trips/${tripId}/to_dos/${task.id}`, {
-  //       headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //     })
-  //     this.getData()
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
-  // handleAttraction = e => {
-  //   const link = { [e.target.name]: e.target.value }
-  //   this.setState({ link })
-  // }
-
-  // createAttraction = async e => {
-  //   e.preventDefault()
-  //   const tripId = this.props.match.params.id
-  //   try {
-  //     await axios.post(`/api/trips/${tripId}/attractions/`, this.state.link, {
-  //       headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //     })
-  //     this.setState({ link: { link: '' } })
-  //     this.getData()
-  //   } catch (err) {
-  //     console.log(err)
-  //     // this.props.history.push('/notfound')
-  //   }
-  // }
-
-  // handleDeleteAttraction = async attraction => {
-  //   const tripId = this.props.match.params.id
-  //   try {
-  //     await axios.delete(`/api/trips/${tripId}/attractions/${attraction.id}`, {
-  //       headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //     })
-  //     this.getData()
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
-  // handlePhoto = e => {
-  //   const image = { [e.target.name]: e.target.value }
-  //   this.setState({ image, displayImgUp: !this.state.displayImgUp })
-  // }
-
-  // createPhoto = async e => {
-  //   e.preventDefault()
-  //   const tripId = this.props.match.params.id
-  //   try {
-  //     await axios.post(`/api/trips/${tripId}/photos/`, this.state.image, {
-  //       headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //     })
-  //     this.setState({ image: { image: '' }, displayImgUp: !this.state.displayImgUp })
-  //     this.getData()
-  //   } catch (err) {
-  //     console.log(err)
-  //     // this.props.history.push('/notfound')
-  //   }
-  // }
-
-  // handleDeletePhoto = async photo => {
-  //   const tripId = this.props.match.params.id
-  //   try {
-  //     await axios.delete(`/api/trips/${tripId}/photos/${photo.id}`, {
-  //       headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //     })
-  //     this.getData()
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
 
   formatDate(date) {
     var monthNames = [
@@ -176,9 +99,73 @@ class OpenTripShow extends React.Component {
   //   }
   // }
 
-  joinTrip = () => {
-    this.state.trip
+  joinTrip = async () => {
+
+    // const tripId = parseInt(this.props.match.params.id)
+    // this.setState({ tripData: { trips: [ ...this.state.tripData.trips, tripId ] } })
+
+    // const userId = Auth.getUser()
+    // try {
+    //   await axios.put(`/api/${userId}/`, this.state.tripData, {
+    //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    //   })
+    //   this.props.history.push('/profile')
+    // } catch (err) {
+    //   this.setState({ errors: err.response.data })
+    // }
+
+    try {
+      const res = await axios.get(`/api/${Auth.getUser()}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.setState({ currentUser: { id: res.data.id, username: res.data.username, image: res.data.image } })
+    } catch (err) {
+      console.log(err)
+      // this.props.history.push('/notfound')
+    }
   }
+
+  completeJoin = async () => {
+    this.setState({ tripData: { attendees: [...this.state.tripData.attendees, this.state.currentUser] } })
+    console.log(this.state.tripData)
+    const tripId = this.props.match.params.id
+    try {
+      await axios.put(`/api/trips/${tripId}/`, this.state.tripData, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      }, () => {
+        this.getData()
+      })
+    } catch (err) {
+      this.setState({ errors: err.response.data })
+    }
+  }
+
+
+  // const userId = Auth.getUser()
+  // try {
+  //   await axios.post(`/api/${userId}/trips/`, this.state.trip, {
+  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
+  //   })
+  //   // this.setState({ to_do: { to_do: '' } })
+  //   // this.getData()
+  // } catch (err) {
+  //   console.log(err)
+  //   // this.props.history.push('/notfound')
+  // }
+  // }
+  //   // try {
+  //   //   await axios.put(`/api/${userId}/`, this.state.trip, {
+  //   //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
+  //   //   })
+  //   //   console.log()
+  //   // } catch (err) {
+  //   //   this.setState({ errors: err.response.data })
+  //   // }
+
+  // }
+  // assignTrip = () => {
+  //   this.setState({ attendees: this.state.currentUser })
+  // }
 
   render() {
     const { destination, start_date, end_date } = this.state.trip
@@ -186,7 +173,8 @@ class OpenTripShow extends React.Component {
     return (
       <div>
         {/* {this.state.data.open_trip ? */}
-          <button onClick={this.joinTrip} className="button">Join Trip</button>
+        <button onClick={this.joinTrip} className="button">Join Trip</button>
+        <button onClick={this.completeJoin} className="button">Complete Trip</button>
         {/* //   :
         //   <button onClick={this.toggleStatus} className="button">Open Trip</button>
         // } */}

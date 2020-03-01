@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Montserrat:400,700|Muli|Nunito|Quicksand|Raleway:400,700|Spartan:400,700&display=swap');
+$primary: #13d696;
 
 body {
   font-family: 'Spartan', ;
@@ -9,19 +10,104 @@ body {
 }
 
 div .hero-body {
-  background-image: url('https://kobietamag.pl/wp-content/uploads/2017/04/city-break-pomysly-nw-wee.jpg');
-  background-size: 1800px;
+  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583095244/ROAM/Untitled_design_5_il58ch.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583078726/ROAM/ROAM_1_xgodiv.png');
+  background-size: contain;
+  background-repeat: no-repeat;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.roam {
-  font-size: 150px;
-  color: black;
-  text-shadow: 1px 2px 3px white;
-  font-family: 'Spartan', ;
+.login-hero {
+  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583101292/ROAM/Untitled_design_10_vsy9a4.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583101295/ROAM/Untitled_design_9_u4b2al.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 600px;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  // background-color: #fff95221;
+  border-radius: 20px;
+  padding: 60px;
+  box-shadow: 0 0 40px #000;
+
+  h2.title {
+    margin-bottom: 60px;
+  }
+
+  input.input {
+    margin: 10px 0;
+  }
+
+  button.button {
+    margin-top: 20px;
+    background-color: #fff952;
+  }
+}
+
+
+
+#root > nav {
+  // background-color: #fff952;
+  // background-color: #30818d;
+  background-color: rgb(17, 49, 54);
+}
+
+h2.trip-header {
+  margin-top: 50px;
+}
+
+* {
+  color: white;
+}
+
+body {
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583081499/ROAM/Untitled_design_4_eu3vle.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583081499/ROAM/Untitled_design_2_sbmaic.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583081499/ROAM/Untitled_design_1_tzjvxu.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583081499/ROAM/Untitled_design_hsnhik.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583081499/ROAM/Untitled_design_3_iczyca.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583095948/ROAM/Untitled_design_6_dovdaz.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583098184/ROAM/Untitled_design_7_d8wjtj.png');
+  // background-size: contain;
+  // background-repeat: repeat-y;  
+  background-color: #73b7c2;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+
+div.box {
+  background-color: #1d1e1f5d;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 10px;
+}
+
+div.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.media {
+  display: flex;
+  flex-direction: column;
+  
+  img {
+    height: 200px;
+  }
 }
 
 .register-container {
@@ -32,3 +118,127 @@ div .hero-body {
 .board-photo {
   height: 200px;
 }
+
+.task-button {
+  font-size: 20px;
+  background: none;
+}
+
+.photo-button {
+  font-size: 20px;
+  background: none;
+}
+
+.task-form {
+  display: flex;
+  border: 2px solid $primary;
+  width: 50%;
+  border-radius: 10px;
+  // padding: 2px;
+
+  input {
+    border: none;
+    border-radius: 0;
+    background-color: none;
+  }
+
+  button {
+    border: none;
+    border-radius: 0;
+    border-left: 1px solid $primary;
+  }
+}
+
+.task-container {
+  display: flex;
+}
+
+.microlink {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  
+  
+}
+
+.microlink_card__content {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+   
+  header {
+    font-size: 16px;
+  }
+
+  div:first-of-type {
+    font-size: 12px;
+  }
+}
+
+// .app {
+//   height: calc(100% - 100px); 
+// }
+
+// .title {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 40px;
+//   color: var(--secondary-color);
+//   background: var(--main-color);
+//   box-sizing: border-box;
+//   margin: 0;
+//   padding: 0;
+//   text-align: center;
+// }
+
+// .message {
+//   margin: 15px 0;
+// }
+
+// .message div:nth-child(1) {
+//   font-size: 11px;
+//   color: var(--main-text-color);
+//   opacity: 0.9;
+//   margin-bottom: 6px;
+// }
+// .message div:nth-child(2) {
+//   background: var(--main-color);
+//   color: var(--secondary-color);
+//   display: inline;
+//   padding: 4px 8px;
+//   border-radius: 8px;
+// }
+
+// .message-list {
+//   box-sizing: border-box;
+//   padding: 0 0 0 6px;
+//   margin: 0;
+//   width: 100%;
+//   height: 100%;
+//   overflow: scroll;
+//   background: white;
+// }
+
+// .send-message-form {
+//   background: var(--send-message-form);
+//   display: flex;
+//   box-sizing: border-box;
+//   height: 60px;
+// }
+
+// .send-message-form input {
+//   width: 100%;
+//   padding: 15px 10px;
+//   border: none;
+//   margin: 0;
+//   background: var(--send-message-form);
+//   font-weight: 200;
+// }
+
+// .send-message-form input:focus {
+//   outline-width: 0;
+// }
+
+// .send-message-form input::placeholder {
+//   color: black;
+// }

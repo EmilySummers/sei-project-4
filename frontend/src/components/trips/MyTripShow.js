@@ -29,7 +29,7 @@ class MyTripShow extends React.Component {
         photos: res.data.photos,
         attractions: res.data.attractions,
         to_dos: res.data.to_dos,
-        data: { open_trip: res.data.open_trip}
+        data: { open_trip: res.data.open_trip }
       })
     } catch (err) {
       console.log(err)
@@ -159,12 +159,12 @@ class MyTripShow extends React.Component {
   }
 
   toggleStatus = () => {
-    this.setState({ data: { open_trip: !this.state.data.open_trip} }, () => {
+    this.setState({ data: { open_trip: !this.state.data.open_trip } }, () => {
       this.editTrip()
     })
   }
 
-  editTrip = async() => {
+  editTrip = async () => {
     const tripId = this.props.match.params.id
     try {
       await axios.put(`/api/trips/${tripId}/`, this.state.data, {
@@ -181,7 +181,7 @@ class MyTripShow extends React.Component {
     const { destination, start_date, end_date } = this.state.trip
     const { photos, attractions, to_dos } = this.state
     return (
-      <div>
+      <section>
         {this.state.data.open_trip ?
           <button onClick={this.toggleStatus} className="button">Close Trip</button>
           :
@@ -189,44 +189,50 @@ class MyTripShow extends React.Component {
         }
         <h1>{destination}</h1>
         <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
-        {photos.map(photo => (
-          <div key={photo.id}>
-            <img className="board-photo" src={photo.image} alt="" />
-            <button className="button" onClick={() => this.handleDeletePhoto(photo)}>Delete photo</button>
-          </div>
-        ))}
-        <form onSubmit={this.createPhoto}>
-          <ImageUpload
-            handleChange={this.handlePhoto}
-            fieldName="image"
-            displayImgUp={this.state.displayImgUp}
-          />
-          <button className="button">Pin photo</button>
-        </form>
-        {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
-        {attractions.map(attraction => (
-          <div key={attraction.id}>
-            <MicrolinkCard url={attraction.link} />
-            <button className="button" onClick={() => this.handleDeleteAttraction(attraction)}>Delete link</button>
-          </div>
-        ))}
-        <form onSubmit={this.createAttraction}>
-          <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
-          <button className="button">Add attraction</button>
-        </form>
-        <ul>
-          {to_dos.map(task => (
-            <div key={task.id}>
-              <li>{task.to_do}</li>
-              <button className="button" onClick={() => this.handleDeleteToDo(task)}>Delete task</button>
+        <div className="columns is-mobile is-multiline">
+          <div className="column is-one-half-desktop is-fullwidth-mobile">
+          {photos.map(photo => (
+            <div key={photo.id}>
+              <img className="board-photo" src={photo.image} alt="" />
+              <button className="photo-button" onClick={() => this.handleDeletePhoto(photo)}>✗</button>
             </div>
           ))}
-        </ul>
-        <form onSubmit={this.createToDo}>
-          <input className="input" onChange={this.handleToDo} placeholder="New task" name="to_do" value={this.state.to_do.to_do}></input>
-          <button className="button">Add task</button>
-        </form>
-      </div>
+            <form onSubmit={this.createPhoto}>
+              <ImageUpload
+                handleChange={this.handlePhoto}
+                fieldName="image"
+                displayImgUp={this.state.displayImgUp}
+              />
+              <button className="button">Pin photo</button>
+            </form>
+            <ul>
+            {to_dos.map(task => (
+              <div className="task-container" key={task.id}>
+                <li>{task.to_do}</li>
+                <button className="task-button" onClick={() => this.handleDeleteToDo(task)}>✘</button>
+              </div>
+            ))}
+          </ul>
+          <form className="task-form" onSubmit={this.createToDo}>
+            <input className="input" onChange={this.handleToDo} placeholder="New task" name="to_do" value={this.state.to_do.to_do}></input>
+            <button className="button">Add task</button>
+          </form>
+          </div>
+          <div className="column is-one-half-desktop is-fullwidth-mobile">
+          {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
+          {attractions.map(attraction => (
+            <div key={attraction.id}>
+              <MicrolinkCard className="microlink" url={attraction.link} />
+              <button className="button" onClick={() => this.handleDeleteAttraction(attraction)}>Delete link</button>
+            </div>
+          ))}
+          <form onSubmit={this.createAttraction}>
+            <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
+            <button className="button">Add attraction</button>
+          </form>
+          </div>
+        </div>
+      </section>
     )
   }
 }

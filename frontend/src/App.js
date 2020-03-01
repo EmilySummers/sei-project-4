@@ -15,6 +15,7 @@ import MyTripIndex from './components/trips/MyTripIndex'
 import TripNew from './components/trips/TripNew'
 import OpenTripIndex from './components/trips/OpenTripIndex'
 import OpenTripShow from './components/trips/OpenTripShow'
+// import MessageApp from './components/messaging/MessageApp'
 
 function App() {
   return (
@@ -22,14 +23,15 @@ function App() {
       <>
         <Navbar />
         <Notifications />
+        {/* <MessageApp /> */}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/profile/edit" component={ProfileEdit} />
           <Route path="/profile" component={Profile} />
-          <Route path="/trips/:id" component={OpenTripShow} />
           <Route path="/trips/new" component={TripNew} />
+          <Route path="/trips/:id" component={OpenTripShow} />
           <Route path="/trips" component={OpenTripIndex} />
           <Route path="/mytrips/:id" component={MyTripShow} />
           <Route path="/mytrips" component={MyTripIndex} />

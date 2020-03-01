@@ -10,6 +10,7 @@ class ProfileEdit extends React.Component {
       username: '',
       email: '',
       image: '',
+      trips: []
     },
     errors: {}
   }

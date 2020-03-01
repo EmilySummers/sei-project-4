@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.status import HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT
+from rest_framework.status import HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_201_CREATED
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
@@ -48,6 +48,19 @@ class LoginView(APIView):
         except User.DoesNotExist:
           raise PermissionDenied({'message': 'Invalid Credentials'})
 
+# COLLECTION - /roamers
+class UserListView(APIView):
+
+  # permission_classes = (IsAuthenticatedOrReadOnly, )
+
+  # INDEX - ALL USERS
+  def get(self, _request):
+    print(User.objects.all())
+    users = User.objects.all()
+    serialized_users = PopulatedUserSerializer(users, many=True)
+
+    return Response(serialized_users.data)
+
 class UserDetailView(APIView):
 
     permission_classes = (IsAuthenticated, )
@@ -86,14 +99,41 @@ class ProfileView(APIView):
         serialized_user = UserSerializer(user)
         return Response(serialized_user.data)
 
-class TripListView(APIView):
+# #? TRIPS
+# # COLLECTION - /:id/trips
+# class TripListView(APIView):
 
-    def post(self, request, pk):
-        # # user = User.objects.get(pk=request.user.id)
-        # serialized_trip = TripSerializer(data=request.data)
-        # if serialized_trip.is_valid():
-        #   request.user.trips.append(serialized_trip)
-        #   return Response(request.user)
-        # return Response(serialized_trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
-        request.data['attendees'] = request.user.id
-        print(request.data)
+#   # CREATE (JOIN) A TRIP
+#   def put(self, request, pk):
+#     user = User.objects.get(pk=request.user.id)
+    
+#     trip = TripSerializer(data=request.data)
+#     user.trips.append(trip)
+#     print(user)
+#     # trip = TripSerializer(data=request.data)
+
+    # if trip.is_valid():
+    #   trip.save()
+    #   user = User.objects.get(pk=pk)
+    #   serialized_user = PopulatedUserSerializer(user)
+    #   return Response(serialized_user.data, status=HTTP_201_CREATED)
+
+    # return Response(trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+#     def post(self, request, pk):
+#         user = User.objects.get(pk=request.user.id)
+        
+#         serialized_trip = TripSerializer(data=request.data)
+#         if serialized_trip.is_valid():
+#           request.user.trips.append(serialized_trip)
+#           return Response(request.user)
+#         return Response(serialized_trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+        
+#         # request.data['attendees'] = request.user.id
+#         # serialized_trip = JoinTripSerializer(data=request.data)
+#         # if serialized_trip.is_valid():
+#         #     serialized_trip.save()
+#         #     return Response(serialized_trip.data)
+#         # return Response(serialized_trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+#         # request.data['trips'] = 

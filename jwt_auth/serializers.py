@@ -10,13 +10,7 @@ class TripSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = Trip
-    fields = '__all__'
-
-# class JoinTripSerializer(serializers.ModelSerializer):
-
-#   class Meta:
-#     model = Trip
-#     fields = 
+    fields = ('id', 'destination')
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -24,28 +18,21 @@ class UserSerializer(serializers.ModelSerializer):
     password_confirmation = serializers.CharField(write_only=True)
 
     def validate(self, data):
-
         password = data.pop('password')
         password_confirmation = data.pop('password_confirmation')
-
+        
         if password != password_confirmation:
             raise serializers.ValidationError({'password_confirmation': 'Passwords do not match'})
-
         # try:
         #     validations.validate_password(password=password)
         # except ValidationError as err:
         #     raise serializers.ValidationError({'password': err.messages})
-
         data['password'] = make_password(password)
         return data
 
     class Meta:
         model = User
         fields = '__all__'
-
-class PopulatedUserSerializer(UserSerializer):
-
-    trips = TripSerializer(many=True)
 
 class EditUserSerializer(serializers.ModelSerializer):
 
@@ -54,12 +41,5 @@ class EditUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'password': {'required': False}, 'image': {'required': False}, 'email': {'required': False}, 'username': {'required': False}} 
 
-# class AttendeeSerializer(serializers.ModelSerializer):
-
-#   class Meta:
-#     model = User
-#     fields = '__all__'
-
-# class PopulatedAttendeeSerializer(AttendeeSerializer):
-
-#   trips_attending = TripSerializer(many=True)
+class PopulatedUserSerializer(EditUserSerializer):
+    trips = TripSerializer(many=True)

@@ -22,10 +22,10 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar is-transparent is-light">
+      <nav className="navbar is-transparent">
         <div className="container">
           <div className="navbar-brand">
-            <Link className="navbar-item" to="/">
+            <Link className="navbar-item has-text-white" to="/">
               <h1>ROAM</h1>
             </Link>
             <p
@@ -39,13 +39,13 @@ class Navbar extends React.Component {
           </div>
           <div className={`navbar-menu ${this.state.navOpen ? 'is-active' : ''}`}>
             <div className="navbar-end">
-              {Auth.isAuthenticated() && <Link className="navbar-item" to="/mytrips">My Trips</Link>}
-              {Auth.isAuthenticated() && <Link className="navbar-item" to="/trips/new">Add a Trip</Link>}
-              {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
-              {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
-              <Link className="navbar-item" to="/trips">Explore</Link>
-              {Auth.isAuthenticated() && <Link className="navbar-item" to="/profile">My Profile</Link>}
-              {Auth.isAuthenticated() && <a href="/" className="navbar-item" onClick={this.handleLogout}>LOGOUT</a>}
+              {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/mytrips">My Trips</Link>}
+              {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/trips/new">Add a Trip</Link>}
+              {!Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/register">Register</Link>}
+              {!Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/login">Login</Link>}
+              <Link className="navbar-item has-text-white" to="/trips">Explore</Link>
+              {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/profile">My Profile</Link>}
+              {Auth.isAuthenticated() && <a href="/" className="navbar-item has-text-white" onClick={this.handleLogout}>LOGOUT</a>}
             </div>
           </div>
         </div>

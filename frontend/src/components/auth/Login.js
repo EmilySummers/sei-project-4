@@ -33,9 +33,9 @@ class Login extends React.Component {
 
   render() {
     return (
-      <section className="login-page">
+      <section className="login-hero">
         <form className="login-form" onSubmit={this.handleSubmit}>
-          <h1 className="title">Login</h1>
+          <h2 className="title has-text-white has-text-centered is-2">Login</h2>
           <div className="field">
             <div className="control">
               <input
@@ -56,7 +56,7 @@ class Login extends React.Component {
             </div>
             {this.state.error && <small className="help is-danger">{this.state.error}</small>}
           </div>
-          <button className="button is-info">Login</button>
+          <button className="button">Login</button>
         </form>
       </section>
     )
