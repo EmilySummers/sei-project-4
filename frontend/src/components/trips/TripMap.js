@@ -1,9 +1,9 @@
-import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import React from 'react'
 import axios from 'axios'
-import MapGL, { Marker, Popup } from 'react-map-gl'
+import ReactMapGL, { NavigationControl } from 'react-map-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import Geocoder from 'react-map-gl-geocoder'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const token = process.env.REACT_APP_MAPBOX
 
@@ -11,7 +11,8 @@ class TripMap extends React.Component {
   state = {
     viewport: {
       longitude: 0,
-      latitude: 0
+      latitude: 0,
+      zoom: 0
     }
   }
 
@@ -21,49 +22,36 @@ class TripMap extends React.Component {
     const destination = this.props.destination
     try {
       const res = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${destination}.json?access_token=${token}`)
-      this.setState({ viewport: { longitude: res.data.features[0].center[0], latitude: res.data.features[0].center[1] } })
+      this.setState({ viewport: { longitude: res.data.features[0].center[0], latitude: res.data.features[0].center[1], zoom: 10 } })
     } catch (err) {
       console.log(err)
     }
   }
 
-  // async componentDidMount() {
-  //   try {
-  //     const search = location.pathname.split('/').slice(2).join('/')
-  //     const mapStartFocus = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${search}.json?access_token=${token}`)
-  //     if (mapStartFocus.data.features.length === 0) {
-  //       this.props.history.push('/map/london')
-  //       alert('Sorry we couldn\'t find that address')
-  //     } else {
-  //       const firstLatLng = mapStartFocus.data.features[0].center
-  //       this.setState({ viewport: { longitude: firstLatLng[0], latitude: firstLatLng[1], zoom: 12 } })
-  //     }
-  //     const res = await axios.get('/api/chefs')
-  //     this.setState({ users: res.data })
-  //     await this.findlatlong()
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
   render() {
     return (
       <>
-        <MapGL
+        <ReactMapGL
           ref={this.myMap}
           {...this.state.viewport}
           height={'30vh'}
           width={'30vw'}
           mapStyle='mapbox://styles/mapbox/streets-v9'
-          // onViewportChange={this.handleViewportChange}
+          onViewportChange={viewport => this.setState({ viewport })}
           mapboxApiAccessToken={token}
-          zoom={12}
-        />
+        >
+          <NavigationControl />
+          {/* <Marker
+            {...this.state.viewport}
+          >
+            <img className="marker" src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png" alt="marker" />
+          </Marker> */}
+        </ReactMapGL>
         <Geocoder
           mapRef={this.myMap}
           mapboxApiAccessToken={token}
-          // onViewportChange={this.handleViewportChange}
-          position="bottom-left"
+          onViewportChange={viewport => this.setState({ viewport })}
+          position="bottom-right"
         />
       </>
     )

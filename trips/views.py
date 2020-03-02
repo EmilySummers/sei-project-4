@@ -1,7 +1,7 @@
 # pylint: disable=no-member
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
+from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Trip, Photo, Attraction, ToDo
@@ -49,10 +49,13 @@ class TripDetailView(APIView):
     def put(self, request, pk):
         trip = Trip.objects.get(pk=pk) 
         updated_trip = EditTripSerializer(trip, data=request.data)
+        # if request.data['end_date'] > request.data['start_date']:
         if updated_trip.is_valid():
-            updated_trip.save()
-            return Response(updated_trip.data)
+          updated_trip.save()
+          return Response(updated_trip.data, status=HTTP_202_ACCEPTED)
         return Response(updated_trip.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+        # return Response({'message': 'End date is before start date'}, status=HTTP_422_UNPROCESSABLE_ENTITY)
+        
 
     # DELETE A TRIP
     def delete(self, _request, pk):

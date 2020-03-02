@@ -3,8 +3,10 @@ import axios from 'axios'
 import ImageUpload from '../ImageUpload'
 import MicrolinkCard from '@microlink/react'
 import { notify } from 'react-notify-toast'
+
 import Auth from '../../lib/auth'
 import TripMap from '../trips/TripMap'
+import TripWeather from '../trips/TripWeather'
 
 class MyTripShow extends React.Component {
   state = {
@@ -20,7 +22,9 @@ class MyTripShow extends React.Component {
     errors: {},
     shareData: { trip_shares: [] },
     shareUser: {},
-    message: 'Share successful!'
+    message: 'Share successful!',
+    dateEdit: true,
+    editData: {}
   }
 
   async getData() {
@@ -243,10 +247,32 @@ class MyTripShow extends React.Component {
     }
   }
 
+  toggleEdit = () => {
+    this.setState({ dateEdit: false })
+  }
+
+  handleChangeEdit = e => {
+    const editData = { ...this.state.editData, [e.target.name]: e.target.value }
+    const errors = { ...this.state.errors, [e.target.name]: '' }
+    this.setState({ editData, errors })
+  }
+
+  editDates = async () => {
+    const tripId = this.props.match.params.id
+    try {
+      await axios.put(`/api/trips/${tripId}/`, this.state.editData, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.getData()
+    } catch (err) {
+      this.setState({ errors: err.response.data })
+    }
+  }
+
 
   render() {
     const { destination, start_date, end_date } = this.state.trip
-    const { photos, attractions, to_dos } = this.state
+    const { photos, attractions, to_dos, dateEdit } = this.state
     return (
       <section>
         {this.state.data.open_trip ?
@@ -265,7 +291,32 @@ class MyTripShow extends React.Component {
           <button className="button">Share Trip</button>
         </form>
         <h1>{destination}</h1>
-        <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
+        {dateEdit ?
+          <div>
+            <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
+            <button className="date-button" onClick={this.toggleEdit}>Edit dates</button>
+          </div>
+          :
+          <form onSubmit={this.editDates}>
+            <div className="field">
+              <div className="control">
+                <input className="input" onChange={this.handleChangeEdit} placeholder="From" name="start_date" type="date"></input>
+              </div>
+            </div>
+            <div className="field">
+              <div className="control">
+                <input
+                  className={this.state.errors.message ? 'input is-danger' : 'input'}
+                  onChange={this.handleChangeEdit}
+                  placeholder="To"
+                  name="end_date"
+                  type="date" />
+              </div>
+              {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
+            </div>
+            <button className="button">Save changes</button>
+          </form>
+        }
         <div className="columns is-mobile is-multiline">
           <div className="column is-one-half-desktop is-fullwidth-mobile">
             {photos.map(photo => (
@@ -314,9 +365,14 @@ class MyTripShow extends React.Component {
               <button className="button">Add attraction</button>
             </form>
             {destination &&
-              <TripMap
-                destination={destination}
-              />
+              <div>
+                <TripMap
+                  destination={destination}
+                />
+                <TripWeather
+                  destination={destination}
+                />
+              </div>
             }
           </div>
         </div>
