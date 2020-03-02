@@ -10,6 +10,7 @@ import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import ProfileEdit from './components/auth/ProfileEdit'
 import Profile from './components/auth/Profile'
+import MyNotifications from './components/auth/MyNotifications'
 import MyTripShow from './components/trips/MyTripShow'
 import MyTripIndex from './components/trips/MyTripIndex'
 import TripNew from './components/trips/TripNew'
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/profile/edit" component={ProfileEdit} />
           <Route path="/profile" component={Profile} />
+          <Route path="/notifications" component={MyNotifications} />
           <Route path="/trips/new" component={TripNew} />
           <Route path="/trips/:id" component={OpenTripShow} />
           <Route path="/trips" component={OpenTripIndex} />

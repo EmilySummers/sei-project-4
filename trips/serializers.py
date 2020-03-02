@@ -41,6 +41,7 @@ class PopulatedTripSerializer(TripSerializer):
   to_dos = ToDoSerializer(many=True)
   owner = UserSerializer()
   attendees = UserSerializer(many=True)
+  # sharees = UserSerializer(many=True)
 
 class EditTripSerializer(serializers.ModelSerializer):
 

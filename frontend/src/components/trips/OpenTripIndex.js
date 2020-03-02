@@ -18,13 +18,27 @@ class OpenTripIndex extends React.Component {
       const res = await axios.get('/api/trips', {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      res.data.filter(trip => {
+      const openTrips = res.data.filter(trip => {
         if (trip.open_trip && trip.owner.id !== Auth.getUser()) {
-          if (new Date(trip.end_date) < today) {
-            past_trips.push(trip)
-          } else {
-            upcoming_trips.push(trip)
+          return trip
+        }
+      })
+      const tripsNotAttending = openTrips.filter(trip => {
+        let singleTrip = ''
+        const attending = trip.attendees.filter(attendee => {
+          if (attendee.id === Auth.getUser()) {
+            singleTrip = 'attending'
           }
+        })
+        if (singleTrip !== 'attending') {
+          return trip
+        }
+      })
+      tripsNotAttending.filter(trip => {
+        if (new Date(trip.end_date) < today) {
+          past_trips.push(trip)
+        } else {
+          upcoming_trips.push(trip)
         }
       })
     this.setState({ upcoming_trips, past_trips })

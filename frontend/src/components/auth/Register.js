@@ -33,7 +33,6 @@ class Register extends React.Component {
   }
 
   render() {
-    console.log(this.state.errors)
     return (
       <section className="register-page">
         <div className="register-container">

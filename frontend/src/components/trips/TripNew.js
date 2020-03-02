@@ -31,7 +31,6 @@ class TripNew extends React.Component {
   }
 
   render() {
-    console.log(this.state.errors)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

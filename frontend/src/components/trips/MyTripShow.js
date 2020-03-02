@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import ImageUpload from '../ImageUpload'
 import MicrolinkCard from '@microlink/react'
+import { notify } from 'react-notify-toast'
 import Auth from '../../lib/auth'
+import TripMap from '../trips/TripMap'
 
 class MyTripShow extends React.Component {
   state = {
@@ -15,7 +17,10 @@ class MyTripShow extends React.Component {
     to_dos: [],
     to_do: { to_do: '' },
     data: { open_trip: false },
-    errors: {}
+    errors: {},
+    shareData: { trip_shares: [] },
+    shareUser: {},
+    message: 'Share successful!'
   }
 
   async getData() {
@@ -177,6 +182,68 @@ class MyTripShow extends React.Component {
     }
   }
 
+  handleChangeShare = e => {
+    const shareUser = { ...this.state.shareUser, [e.target.name]: e.target.value }
+    const errors = { ...this.state.errors, [e.target.name]: '' }
+    this.setState({ shareUser, errors })
+  }
+
+  shareTrip = async e => {
+    e.preventDefault()
+    try {
+      const res = await axios.get('/api/roamers', {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      const shareWith = res.data.filter(user => {
+        return user.email === this.state.shareUser.email
+      })
+      const userId = shareWith[0].id
+      this.getUserShares(userId)
+    } catch (err) {
+      console.log(err)
+      // this.setState({ errors: err.response.data })
+    }
+  }
+
+  getUserShares = async userId => {
+    try {
+      const { data } = await axios.get(`/api/${userId}/`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      const filteredIds = data.trip_shares.map(trip_share => {
+        return trip_share.id
+      })
+      this.setState({ shareData: { trip_shares: [...filteredIds] } }, () => {
+        this.addTripShare(userId)
+      })
+    } catch (err) {
+      console.log(err)
+      // this.props.history.push('/notfound')
+    }
+  }
+
+  addTripShare = async userId => {
+    const tripId = parseInt(this.props.match.params.id)
+    this.setState({ shareData: { trip_shares: [...this.state.shareData.trip_shares, tripId] } }, () => {
+      this.completeShare(userId)
+    })
+  }
+
+  completeShare = async userId => {
+    try {
+      await axios.put(`/api/${userId}/`, this.state.shareData, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.setState({ shareUser: { email: '' } })
+      notify.show(this.state.message, 'success', 3000)
+      // this.props.history.push('/mytrips')
+    } catch (err) {
+      console.log(err)
+      // this.setState({ errors: err.response.data })
+    }
+  }
+
+
   render() {
     const { destination, start_date, end_date } = this.state.trip
     const { photos, attractions, to_dos } = this.state
@@ -187,16 +254,26 @@ class MyTripShow extends React.Component {
           :
           <button onClick={this.toggleStatus} className="button">Open Trip</button>
         }
+        <form onSubmit={this.shareTrip}>
+          <label className="label">Please enter email</label>
+          <input
+            onChange={this.handleChangeShare}
+            placeholder="Email"
+            name="email"
+            value={this.state.shareUser.email}
+          />
+          <button className="button">Share Trip</button>
+        </form>
         <h1>{destination}</h1>
         <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
         <div className="columns is-mobile is-multiline">
           <div className="column is-one-half-desktop is-fullwidth-mobile">
-          {photos.map(photo => (
-            <div key={photo.id}>
-              <img className="board-photo" src={photo.image} alt="" />
-              <button className="photo-button" onClick={() => this.handleDeletePhoto(photo)}>✗</button>
-            </div>
-          ))}
+            {photos.map(photo => (
+              <div key={photo.id}>
+                <img className="board-photo" src={photo.image} alt="" />
+                <button className="photo-button" onClick={() => this.handleDeletePhoto(photo)}>✗</button>
+              </div>
+            ))}
             <form onSubmit={this.createPhoto}>
               <ImageUpload
                 handleChange={this.handlePhoto}
@@ -206,30 +283,41 @@ class MyTripShow extends React.Component {
               <button className="button">Pin photo</button>
             </form>
             <ul>
-            {to_dos.map(task => (
-              <div className="task-container" key={task.id}>
-                <li>{task.to_do}</li>
-                <button className="task-button" onClick={() => this.handleDeleteToDo(task)}>✘</button>
-              </div>
-            ))}
-          </ul>
-          <form className="task-form" onSubmit={this.createToDo}>
-            <input className="input" onChange={this.handleToDo} placeholder="New task" name="to_do" value={this.state.to_do.to_do}></input>
-            <button className="button">Add task</button>
-          </form>
+              {to_dos.map(task => (
+                <div className="task-container" key={task.id}>
+                  <li>{task.to_do}</li>
+                  <button className="task-button" onClick={() => this.handleDeleteToDo(task)}>✘</button>
+                </div>
+              ))}
+            </ul>
+            <form className="task-form" onSubmit={this.createToDo}>
+              <input
+                className="input"
+                onChange={this.handleToDo}
+                placeholder="New task"
+                name="to_do"
+                value={this.state.to_do.to_do}
+              />
+              <button className="button">Add task</button>
+            </form>
           </div>
           <div className="column is-one-half-desktop is-fullwidth-mobile">
-          {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
-          {attractions.map(attraction => (
-            <div key={attraction.id}>
-              <MicrolinkCard className="microlink" url={attraction.link} />
-              <button className="button" onClick={() => this.handleDeleteAttraction(attraction)}>Delete link</button>
-            </div>
-          ))}
-          <form onSubmit={this.createAttraction}>
-            <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
-            <button className="button">Add attraction</button>
-          </form>
+            {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
+            {attractions.map(attraction => (
+              <div key={attraction.id}>
+                <MicrolinkCard className="microlink" url={attraction.link} />
+                <button className="button" onClick={() => this.handleDeleteAttraction(attraction)}>Delete link</button>
+              </div>
+            ))}
+            <form onSubmit={this.createAttraction}>
+              <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
+              <button className="button">Add attraction</button>
+            </form>
+            {destination &&
+              <TripMap
+                destination={destination}
+              />
+            }
           </div>
         </div>
       </section>

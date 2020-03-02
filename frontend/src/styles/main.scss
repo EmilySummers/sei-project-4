@@ -57,7 +57,7 @@ div .hero-body {
 
 
 
-#root > nav {
+nav.navbar, div.navbar-menu {
   // background-color: #fff952;
   // background-color: #30818d;
   background-color: rgb(17, 49, 54);
@@ -67,9 +67,9 @@ h2.trip-header {
   margin-top: 50px;
 }
 
-* {
-  color: white;
-}
+// * {
+//   color: white;
+// }
 
 body {
   // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583081499/ROAM/Untitled_design_4_eu3vle.png');
@@ -93,21 +93,22 @@ div.box {
   flex-direction: column;
   width: 20%;
   margin: 10px;
+
+  .media {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    
+    img {
+      height: 200px;
+    }
+  }
 }
 
 div.boxes {
   display: flex;
   flex-wrap: wrap;
   
-}
-
-.media {
-  display: flex;
-  flex-direction: column;
-  
-  img {
-    height: 200px;
-  }
 }
 
 .register-container {

@@ -47,7 +47,6 @@ class ProfileEdit extends React.Component {
   }
 
   render() {
-    console.log(this.state.data)
     return (
       <section>
         <form onSubmit={this.handleSubmit}>

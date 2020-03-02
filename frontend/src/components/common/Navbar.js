@@ -29,7 +29,7 @@ class Navbar extends React.Component {
               <h1>ROAM</h1>
             </Link>
             <p
-              className={`navbar-burger ${this.state.navOpen ? 'is-active' : ''}`}
+              className={`navbar-burger has-text-white ${this.state.navOpen ? 'is-active' : ''}`}
               onClick={this.toggleNavbar}
             >
               <span aria-hidden="true"></span>
@@ -44,6 +44,7 @@ class Navbar extends React.Component {
               {!Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/register">Register</Link>}
               {!Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/login">Login</Link>}
               <Link className="navbar-item has-text-white" to="/trips">Explore</Link>
+              {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/notifications">Notifications</Link>}
               {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/profile">My Profile</Link>}
               {Auth.isAuthenticated() && <a href="/" className="navbar-item has-text-white" onClick={this.handleLogout}>LOGOUT</a>}
             </div>

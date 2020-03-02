@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
-from .serializers import UserSerializer, PopulatedUserSerializer, EditUserSerializer, TripSerializer
+from .serializers import UserSerializer, PopulatedUserSerializer, EditUserSerializer
 User = get_user_model()
 
 class RegisterView(APIView):
@@ -65,7 +65,7 @@ class UserDetailView(APIView):
 
     permission_classes = (IsAuthenticated, )
 
-    # SHOW - PROFILE
+    # SHOW - SINGLE USER
     def get(self, _request, pk):
         user = User.objects.get(pk=pk) 
         serialized_user = PopulatedUserSerializer(user)
