@@ -14,7 +14,7 @@ class TripWeather extends React.Component {
   async componentDidMount() {
     const destination = this.props.destination
     try {
-      const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${destination}&appid=7bb82663126ba33c862695982882b9ba`)
+      const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${destination}&appid=${key}`)
       this.setState({ main: data.weather[0].main, description: data.weather[0].description, icon: data.weather[0].icon, temp: data.main.temp })
       this.calculateTemp()
     } catch (err) {
@@ -27,16 +27,14 @@ class TripWeather extends React.Component {
     return temp
   }
 
-
   render() {
-    const { main, description, icon, temp } = this.state
-    console.log(icon)
+    const { main, description, icon } = this.state
     return (
       <div>
         <h1>Weather</h1>
         <p>{main}</p>
         <p>{description}</p>
-        <img src={`../../assets/${icon}.png`} alt="weather" />
+        <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="weather" />
         <p>{this.calculateTemp()}℃</p>
       </div>
     )

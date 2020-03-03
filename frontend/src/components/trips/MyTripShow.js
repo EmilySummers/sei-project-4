@@ -286,7 +286,7 @@ class MyTripShow extends React.Component {
             onChange={this.handleChangeShare}
             placeholder="Email"
             name="email"
-            value={this.state.shareUser.email}
+            value={this.state.shareUser.email || ''}
           />
           <button className="button">Share Trip</button>
         </form>

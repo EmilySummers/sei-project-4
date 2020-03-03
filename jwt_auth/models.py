@@ -6,5 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
   email = models.CharField(max_length=80, unique=True)
   image = models.CharField(max_length=500)
-  trip_shares = models.ManyToManyField('trips.Trip', related_name='sharees+', blank=True)
   trips = models.ManyToManyField('trips.Trip', related_name='attendees', blank=True)
+  trip_shares = models.ManyToManyField('trips.Trip', related_name='sharees+', blank=True)
+  trip_requests = models.ManyToManyField('trips.Trip', related_name='requesters+', blank=True)
+  trip_offers = models.ManyToManyField('trips.Trip', related_name='requestees+', blank=True)

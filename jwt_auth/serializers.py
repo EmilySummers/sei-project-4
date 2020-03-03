@@ -44,3 +44,5 @@ class EditUserSerializer(serializers.ModelSerializer):
 class PopulatedUserSerializer(EditUserSerializer):
     trips = TripSerializer(many=True)
     trip_shares = TripSerializer(many=True)
+    trip_requests = TripSerializer(many=True)
+    trip_offers = TripSerializer(many=True)

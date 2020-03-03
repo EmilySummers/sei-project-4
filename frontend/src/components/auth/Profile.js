@@ -16,7 +16,6 @@ class Profile extends React.Component {
       this.setState({ user: res.data })
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/notfound')
     }
   }
 

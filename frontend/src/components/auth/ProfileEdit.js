@@ -42,7 +42,6 @@ class ProfileEdit extends React.Component {
       this.setState({ data })
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/notfound')
     }
   }
 

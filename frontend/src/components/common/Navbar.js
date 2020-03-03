@@ -43,7 +43,7 @@ class Navbar extends React.Component {
               {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/trips/new">Add a Trip</Link>}
               {!Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/register">Register</Link>}
               {!Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/login">Login</Link>}
-              <Link className="navbar-item has-text-white" to="/trips">Explore</Link>
+              {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/trips">Explore</Link>}
               {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/notifications">Notifications</Link>}
               {Auth.isAuthenticated() && <Link className="navbar-item has-text-white" to="/profile">My Profile</Link>}
               {Auth.isAuthenticated() && <a href="/" className="navbar-item has-text-white" onClick={this.handleLogout}>LOGOUT</a>}
