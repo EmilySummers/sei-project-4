@@ -35,7 +35,7 @@ class Login extends React.Component {
     return (
       <section className="login-hero">
         <form className="login-form" onSubmit={this.handleSubmit}>
-          <h2 className="title has-text-white has-text-centered is-2">Login</h2>
+          <h2 className="title has-text-centered is-2">Login</h2>
           <div className="field">
             <div className="control">
               <input

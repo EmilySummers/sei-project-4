@@ -28,7 +28,7 @@ class ImageUpload extends React.Component {
           </div>
           :
           <>
-            <label className={labelClass}>{this.props.labelText}</label>
+            {/* <label className={labelClass}>{this.props.labelText}</label> */}
             <input
               className={this.props.inputClassName}
               type="file"

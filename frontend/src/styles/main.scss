@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Montserrat:400,700|Muli|Nunito|Quicksand|Raleway:400,700|Spartan:400,700&display=swap');
-$primary: #13d696;
+$dark-green: #30818d;
+$yellow: #fff952;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
 
 body {
   font-family: 'Spartan', ;
@@ -10,25 +19,103 @@ body {
 }
 
 div .hero-body {
-  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583095244/ROAM/Untitled_design_5_il58ch.png');
+  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583247001/ROAM/Untitled_design_5_o4jhlj.png');
   // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583078726/ROAM/ROAM_1_xgodiv.png');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 94vh;
+}
+
+.login-hero {
+  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583247289/ROAM/Untitled_design_10_qzymth.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 94vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-hero {
-  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583101292/ROAM/Untitled_design_10_vsy9a4.png');
-  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583101295/ROAM/Untitled_design_9_u4b2al.png');
-  background-size: contain;
+.register-hero {
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583251276/ROAM/Untitled_design_12_df0ygg.png');
+  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583254837/ROAM/Untitled_design_13_hs5li0.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583256081/ROAM/Untitled_design_15_tdfl8w.png');
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583256081/ROAM/Untitled_design_14_hbsyji.png');
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 94vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.register-wrapper {
+  height: 100%;
+  width: 100%;
+  min-height: 94vh;
+  // background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.column {
+  margin: 0;
+  padding: 0;
+}
+
+div.register-container {
+  height: 85vh;
+  margin: 0;
+  box-shadow: 0 0 40px #000;
+  border-radius: 5px;
+
+  div.column {
+    height: 100%;
+    
+
+    img {
+      height: 100%;
+    }
+
+    .register-form {
+      background-color: white;
+      // width:
+      margin: 0 40px;
+      padding: 40px;
+      height: 100%;
+
+      .reg-title {
+        font-size: 34px;
+        font-weight: bold;
+        color: $dark-green;
+        margin-bottom: 20px;
+      }
+
+      button.button {
+        background-color: $dark-green;
+        color: white;
+        margin-top: 30px;
+        height: 45px;
+      }
+    }
+  }
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583253554/ROAM/output-onlinepngtools_2_acf2kc.png');
+  background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583254082/ROAM/output-onlinepngtools_4_uuxdm5.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
+
+  .register-image {
+    opacity: 0;
+  }
 }
 
 .login-form {
@@ -40,6 +127,8 @@ div .hero-body {
   border-radius: 20px;
   padding: 60px;
   box-shadow: 0 0 40px #000;
+  color: white;
+  // background-color: white;
 
   h2.title {
     margin-bottom: 60px;
@@ -81,7 +170,7 @@ body {
   // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583098184/ROAM/Untitled_design_7_d8wjtj.png');
   // background-size: contain;
   // background-repeat: repeat-y;  
-  background-color: #73b7c2;
+  background-color: #30818d;
   // display: flex;
   // justify-content: center;
   // align-items: center;
@@ -132,7 +221,7 @@ div.boxes {
 
 .task-form {
   display: flex;
-  border: 2px solid $primary;
+  // border: 2px solid $primary;
   width: 50%;
   border-radius: 10px;
   // padding: 2px;
@@ -146,7 +235,7 @@ div.boxes {
   button {
     border: none;
     border-radius: 0;
-    border-left: 1px solid $primary;
+    // border-left: 1px solid $primary;
   }
 }
 

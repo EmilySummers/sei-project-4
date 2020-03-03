@@ -42,7 +42,6 @@ class MyTripShow extends React.Component {
       })
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/notfound')
     }
   }
 
@@ -72,7 +71,6 @@ class MyTripShow extends React.Component {
       this.getData()
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/notfound')
     }
   }
 
@@ -104,7 +102,6 @@ class MyTripShow extends React.Component {
       this.getData()
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/notfound')
     }
   }
 
@@ -136,7 +133,6 @@ class MyTripShow extends React.Component {
       this.getData()
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/notfound')
     }
   }
 
@@ -222,7 +218,6 @@ class MyTripShow extends React.Component {
       })
     } catch (err) {
       console.log(err)
-      // this.props.history.push('/notfound')
     }
   }
 
@@ -240,7 +235,6 @@ class MyTripShow extends React.Component {
       })
       this.setState({ shareUser: { email: '' } })
       notify.show(this.state.message, 'success', 3000)
-      // this.props.history.push('/mytrips')
     } catch (err) {
       console.log(err)
       // this.setState({ errors: err.response.data })

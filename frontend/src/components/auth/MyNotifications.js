@@ -16,7 +16,8 @@ class MyNotifications extends React.Component {
     },
     trip_offers: {
       trip_offers: []
-    }
+    },
+    errors: {}
   }
 
   getTripData = async () => {
