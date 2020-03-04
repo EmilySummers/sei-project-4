@@ -163,7 +163,8 @@ class MyTripShow extends React.Component {
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
 
-  toggleStatus = () => {
+  toggleStatus = (e) => {
+    e.preventDefault()
     this.setState({ data: { open_trip: !this.state.data.open_trip } }, () => {
       this.editTrip()
     })
@@ -268,110 +269,133 @@ class MyTripShow extends React.Component {
     const { destination, start_date, end_date } = this.state.trip
     const { photos, attractions, to_dos, dateEdit } = this.state
     return (
-      <section>
-        {this.state.data.open_trip ?
-          <button onClick={this.toggleStatus} className="button">Close Trip</button>
-          :
-          <button onClick={this.toggleStatus} className="button">Open Trip</button>
-        }
-        <form onSubmit={this.shareTrip}>
-          <label className="label">Please enter email</label>
-          <input
-            onChange={this.handleChangeShare}
-            placeholder="Email"
-            name="email"
-            value={this.state.shareUser.email || ''}
-          />
-          <button className="button">Share Trip</button>
-        </form>
-        <h1>{destination}</h1>
-        {dateEdit ?
-          <div>
-            <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
-            <button className="date-button" onClick={this.toggleEdit}>Edit dates</button>
-          </div>
-          :
-          <form onSubmit={this.editDates}>
-            <div className="field">
-              <div className="control">
-                <input className="input" onChange={this.handleChangeEdit} placeholder="From" name="start_date" type="date"></input>
-              </div>
-            </div>
-            <div className="field">
-              <div className="control">
-                <input
-                  className={this.state.errors.message ? 'input is-danger' : 'input'}
-                  onChange={this.handleChangeEdit}
-                  placeholder="To"
-                  name="end_date"
-                  type="date" />
-              </div>
-              {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
-            </div>
-            <button className="button">Save changes</button>
-          </form>
-        }
-        <div className="columns is-mobile is-multiline">
-          <div className="column is-one-half-desktop is-fullwidth-mobile">
-            {photos.map(photo => (
-              <div key={photo.id}>
-                <img className="board-photo" src={photo.image} alt="" />
-                <button className="photo-button" onClick={() => this.handleDeletePhoto(photo)}>✗</button>
-              </div>
-            ))}
-            <form onSubmit={this.createPhoto}>
-              <ImageUpload
-                handleChange={this.handlePhoto}
-                fieldName="image"
-                displayImgUp={this.state.displayImgUp}
-                preset="j4ev6wv3"
-              />
-              <button className="button">Pin photo</button>
-            </form>
-            <ul>
-              {to_dos.map(task => (
-                <div className="task-container" key={task.id}>
-                  <li>{task.to_do}</li>
-                  <button className="task-button" onClick={() => this.handleDeleteToDo(task)}>✘</button>
-                </div>
-              ))}
-            </ul>
-            <form className="task-form" onSubmit={this.createToDo}>
+      <div className="hero show-hero">
+        <div className="show-container">
+          <div className="button-wrapper">
+            <form className="share-form" onSubmit={this.shareTrip}>
               <input
-                className="input"
-                onChange={this.handleToDo}
-                placeholder="New task"
-                name="to_do"
-                value={this.state.to_do.to_do}
+                onChange={this.handleChangeShare}
+                placeholder="Enter email to share trip"
+                name="email"
+                value={this.state.shareUser.email || ''}
               />
-              <button className="button">Add task</button>
+              <button></button>
             </form>
-          </div>
-          <div className="column is-one-half-desktop is-fullwidth-mobile">
-            {/* {attractions.map(attraction => <a key={attraction.id} href={attraction.link}>{attraction.link}</a>)} */}
-            {attractions.map(attraction => (
-              <div key={attraction.id}>
-                <MicrolinkCard className="microlink" url={attraction.link} />
-                <button className="button" onClick={() => this.handleDeleteAttraction(attraction)}>Delete link</button>
+            {this.state.data.open_trip ?
+              <div className="open-wrapper">
+                <button onClick={this.toggleStatus} className="button-close">Close Trip</button>
+                <small>Public / Private</small>
               </div>
-            ))}
-            <form onSubmit={this.createAttraction}>
-              <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
-              <button className="button">Add attraction</button>
-            </form>
-            {destination &&
-              <div>
-                <TripMap
-                  destination={destination}
-                />
-                <TripWeather
-                  destination={destination}
-                />
+              :
+              <div className="open-wrapper">
+                <button onClick={this.toggleStatus} className="button-open"></button>
+                <small>Public / Private</small>
               </div>
             }
           </div>
+          <div className="title-wrapper">
+            <h2>{destination}</h2>
+          </div>
+          {dateEdit ?
+            <div className="show-edit-dates">
+              <h3>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h3>
+              <button className="date-button" onClick={this.toggleEdit}>✎</button>
+            </div>
+            :
+            <form onSubmit={this.editDates}>
+              <div className="field">
+                <div className="control">
+                  <input className="input" onChange={this.handleChangeEdit} placeholder="From" name="start_date" type="date"></input>
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  <input
+                    className={this.state.errors.message ? 'input is-danger' : 'input'}
+                    onChange={this.handleChangeEdit}
+                    placeholder="To"
+                    name="end_date"
+                    type="date" />
+                </div>
+                {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
+              </div>
+              <button className="button">Save changes</button>
+            </form>
+          }
+          <div className="columns is-mobile is-multiline">
+            <div className="column is-one-half-desktop is-fullwidth-mobile">
+              <div className="show-photos">
+                {photos.map(photo => (
+                  <div className="photo-wrapper" key={photo.id}>
+                    <img className="board-photo" src={photo.image} alt="" />
+                    <button className="photo-button" onClick={() => this.handleDeletePhoto(photo)}>✗</button>
+                  </div>
+                ))}
+                <form onSubmit={this.createPhoto}>
+                  <div className="photo-wrapper">
+                    <div className="image-container">
+                      <ImageUpload
+                        handleChange={this.handlePhoto}
+                        fieldName="image"
+                        displayImgUp={this.state.displayImgUp}
+                        preset="j4ev6wv3"
+                        inputClassName="profile-image"
+                      />
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+              <div className="my-todos">
+                <ul>
+                  <p className="todo-header">To do...</p>
+                  {to_dos.map(task => (
+                    <div className="task-container" key={task.id}>
+                      <li>{task.to_do}</li>
+                      <button className="task-button" onClick={() => this.handleDeleteToDo(task)}>✘</button>
+                    </div>
+                  ))}
+                </ul>
+                <form className="task-form" onSubmit={this.createToDo}>
+                  <input
+                    className="input"
+                    onChange={this.handleToDo}
+                    placeholder="New task"
+                    name="to_do"
+                    value={this.state.to_do.to_do}
+                  />
+                  <button className="button">Add task</button>
+                </form>
+              </div>
+            </div>
+            <div className="column is-one-half-desktop is-fullwidth-mobile">
+              <div className="show-links">
+                {attractions.map(attraction => (
+                  <div className="link-wrapper" key={attraction.id}>
+                    <MicrolinkCard className="microlink" url={attraction.link} />
+                    <button className="photo-button" onClick={() => this.handleDeleteAttraction(attraction)}>✘</button>
+                  </div>
+                ))}
+                <form className="link-form" onSubmit={this.createAttraction}>
+                  <input className="input" onChange={this.handleAttraction} placeholder="Add your link here" name="link" value={this.state.link.link}></input>
+                  <button className="button">✔︎</button>
+                </form>
+              </div>
+              {destination &&
+                <div className="extras">
+                  <TripMap
+                    destination={destination}
+                  />
+                  <TripWeather
+                    destination={destination}
+                  />
+                </div>
+              }
+            </div>
+          </div>
+
         </div>
-      </section>
+      </div >
     )
   }
 }

@@ -138,26 +138,37 @@ class MyNotifications extends React.Component {
   }
 
   render() {
+    console.log(this.state.tripData.trip_offers)
     return (
-      <>
-        <h1>Notifications</h1>
-        {this.state.tripData.trip_shares.length < 1 &&
-          this.state.tripData.trip_shares.map((trip_share, i) => (
-            <div key={i}>
-              {/* {trip_share.photos[0] ? <img src={trip_share.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />} */}
-              <p>You have been invited to join a trip to {trip_share.destination} on {this.formatDate(new Date(trip_share.start_date))}</p>
-              <button onClick={() => this.joinTrip(trip_share.id)}>Join Trip</button>
-            </div>
-          ))}
-        {this.state.tripData.trip_offers.length < 1  &&
-          this.state.tripData.trip_offers.map((trip_offer, i) => (
-            <div key={i}>
-              {/* {trip_share.photos[0] ? <img src={trip_share.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />} */}
-              <p>... has requested to join your trip to {trip_offer.destination} on {this.formatDate(new Date(trip_offer.start_date))}</p>
-              <button onClick={() => this.getRequestData(trip_offer.id)}>Accept request</button>
-            </div>
-          ))}
-      </>
+      <div className="hero profile-hero">
+        <div className="note-wrapper">
+          <div className="note-container">
+            <h2>Notifications</h2>
+            {this.state.tripData.trip_shares.length < 1 && this.state.tripData.trip_offers.length < 1
+              ?
+              <h2>You have no notifications</h2>
+              :
+              <div className="wrapper">
+                {this.state.tripData.trip_shares.length > 0 &&
+                  this.state.tripData.trip_shares.map((trip_share, i) => (
+                    <div className="note-wrap" key={i}>
+                      {/* {trip_share.photos[0] ? <img src={trip_share.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />} */}
+                      <p>You have been invited to join a trip to {trip_share.destination} on {this.formatDate(new Date(trip_share.start_date))}</p>
+                      <button onClick={() => this.joinTrip(trip_share.id)}>Join</button>
+                    </div>
+                  ))}
+                {this.state.tripData.trip_offers.length > 0 &&
+                  this.state.tripData.trip_offers.map((trip_offer, i) => (
+                    <div className="note-wrap" key={i}>
+                      {/* {trip_share.photos[0] ? <img src={trip_share.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />} */}
+                      <p>... has requested to join your trip to {trip_offer.destination} on {this.formatDate(new Date(trip_offer.start_date))}</p>
+                      <button onClick={() => this.getRequestData(trip_offer.id)}>Accept</button>
+                    </div>
+                  ))}
+                  </div>}
+          </div>
+        </div>
+      </div>
     )
   }
 }

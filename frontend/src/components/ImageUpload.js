@@ -24,9 +24,11 @@ class ImageUpload extends React.Component {
     return (
       <>
         {image && displayImgUp ?
-          <div>
+          <div className="image-upload">
             <img src={image} alt="profile" />
+            <button className="pin-button">✔︎</button>
           </div>
+          
           :
           <>
             {/* <label className={labelClass}>{this.props.labelText}</label> */}

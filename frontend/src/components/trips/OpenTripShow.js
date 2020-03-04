@@ -180,7 +180,6 @@ class OpenTripShow extends React.Component {
         <div className="show-container">
           <div className="button-wrapper">
             <button onClick={this.generateRequest} className="button-join"></button>
-            <small>Request to join</small>
           </div>
           <div className="title-wrapper">
             <h2>{destination}</h2>
@@ -200,8 +199,8 @@ class OpenTripShow extends React.Component {
               </div>
             </div>
             <div className="column is-one-half-desktop is-fullwidth-mobile">
-              <div className="show-links">
-                {attractions.map(attraction => <MicrolinkCard url={attraction.link} key={attraction.id} />)}
+              <div className="show-links-open">
+                  {attractions.map(attraction => <MicrolinkCard url={attraction.link} key={attraction.id} />)}
               </div>
 
               {destination &&
