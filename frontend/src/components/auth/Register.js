@@ -100,6 +100,7 @@ class Register extends React.Component {
                       fieldName="image"
                       displayImgUp={true}
                       inputClassName="register-image"
+                      preset="afar9d6z"
                       // labelText="Add photo"
                     />
                   </div>

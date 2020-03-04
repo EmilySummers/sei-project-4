@@ -47,18 +47,20 @@ class ProfileEdit extends React.Component {
 
   render() {
     return (
-      <section>
-        <form onSubmit={this.handleSubmit}>
-          {/* <div className="field">
-            <label className="label">
-              <div className="control">
-                <input className="input"></input>
+      <div className="hero profile-hero">
+        <div className="profile-wrapper">
+          <form onSubmit={this.handleSubmit}>
+            <div className="profile-container">
+              <div className="image-container">
+                <ImageUpload
+                  handleChange={this.handleChange}
+                  fieldName="image"
+                  displayImgUp={true}
+                  preset="afar9d6z"
+                  inputClassName="profile-image"
+                />
               </div>
-            </label>
-          </div> */}
-          <div className="columns">
-            <div className="column">
-              <div className="field">
+              <div className="field-name">
                 <div className="control">
                   <input
                     className={this.state.errors.username ? 'input is-danger' : 'input'}
@@ -70,7 +72,7 @@ class ProfileEdit extends React.Component {
                 </div>
                 {this.state.errors.username && <small className="help is-danger">{this.state.errors.username}</small>}
               </div>
-              <div className="field">
+              <div className="field-email">
                 <div className="control">
                   <input
                     className={this.state.errors.email ? 'input is-danger' : 'input'}
@@ -82,15 +84,12 @@ class ProfileEdit extends React.Component {
               </div>
               {this.state.errors.email && <small className="help is-danger">{this.state.errors.email}</small>}
             </div>
-          </div>
-          <ImageUpload
-            handleChange={this.handleChange}
-            fieldName="image"
-            displayImgUp={true}
-          />
-          <button className="button is-info">Save changes</button>
-        </form>
-      </section>
+            <div className="profile-buttons">
+              <button className="button edit">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
     )
   }
 }

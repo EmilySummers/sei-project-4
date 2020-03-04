@@ -38,15 +38,21 @@ class Profile extends React.Component {
   render() {
     const { username, email, image, id } = this.state.user
     return (
-      <div>
-        <h2>{username}</h2>
-        <p>{email}</p>
-        <img src={image} alt="profile" />
-        <Link to={'/profile/edit'} className="button">
-          Edit Profile
+      <div className="hero profile-hero">
+        <div className="profile-wrapper">
+          <div className="profile-container">
+            <img className="profile-image" src={image} alt="profile" />
+            <h2>{username}</h2>
+            <p>{email}</p>
+          </div>
+          <div className="profile-buttons">
+            <Link to={'/profile/edit'} className="button edit">
+              Edit Profile
         </Link>
-        <button className="button is-danger" onClick={() => this.handleDelete(id)}>Delete account</button>
-      </div>
+            <button className="button delete-account" onClick={() => this.handleDelete(id)}>Delete account</button>
+          </div>
+        </div>
+      </div >
     )
   }
 }

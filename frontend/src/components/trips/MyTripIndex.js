@@ -73,44 +73,47 @@ class MyTripIndex extends React.Component {
     const { upcoming_trips, past_trips } = this.state
     return (
       <section>
-          <div>
-            <h2 className="title has-text-white trip-header">Upcoming Trips</h2>
-            <div className="boxes">
-              {upcoming_trips.map(trip => (
-                <div className="box" key={trip.id}>
-                  <Link to={`/mytrips/${trip.id}`}>
-                    <div className="media">
-                      {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
-                      <div className="info">
-                        <h2 className="title has-text-white">{trip.destination}</h2>
-                        <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
-                      </div>
+        <Link to="/trips/new">
+          <button className="button">Add a Trip</button>
+        </Link>
+        <div>
+          <h2 className="title has-text-white trip-header">Upcoming Trips</h2>
+          <div className="boxes">
+            {upcoming_trips.map(trip => (
+              <div className="box" key={trip.id}>
+                <Link to={`/mytrips/${trip.id}`}>
+                  <div className="media">
+                    {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
+                    <div className="info">
+                      <h2 className="title has-text-white">{trip.destination}</h2>
+                      <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
                     </div>
-                  </Link>
-                  <button className="button" onClick={() => this.handleDelete(trip)}>Delete trip</button>
-                </div>
-              ))}
-            </div>
+                  </div>
+                </Link>
+                <button className="button" onClick={() => this.handleDelete(trip)}>Delete trip</button>
+              </div>
+            ))}
           </div>
-          <div>
-            <h2 className="title has-text-white trip-header">Past Trips</h2>
-            <div className="boxes">
-              {past_trips.map(trip => (
-                <div className="box" key={trip.id}>
-                  <Link to={`/mytrips/${trip.id}`}>
-                    <div className="media">
-                      {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
-                      <div className="info">
-                        <h2 className="title has-text-white">{trip.destination}</h2>
-                        <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
-                      </div>
+        </div>
+        <div>
+          <h2 className="title has-text-white trip-header">Past Trips</h2>
+          <div className="boxes">
+            {past_trips.map(trip => (
+              <div className="box" key={trip.id}>
+                <Link to={`/mytrips/${trip.id}`}>
+                  <div className="media">
+                    {trip.photos[0] ? <img src={trip.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />}
+                    <div className="info">
+                      <h2 className="title has-text-white">{trip.destination}</h2>
+                      <h4>{this.formatDate(new Date(trip.start_date))} - {this.formatDate(new Date(trip.end_date))}</h4>
                     </div>
-                  </Link>
-                  <button className="button" onClick={() => this.handleDelete(trip)}>Delete trip</button>
-                </div>
-              ))}
-            </div>
+                  </div>
+                </Link>
+                <button className="button" onClick={() => this.handleDelete(trip)}>Delete trip</button>
+              </div>
+            ))}
           </div>
+        </div>
       </section>
     )
   }

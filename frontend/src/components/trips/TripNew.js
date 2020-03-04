@@ -32,32 +32,47 @@ class TripNew extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <h2 className="title">Add a Trip</h2>
-          <div className="field">
-            <div className="control">
-              <input className="input" onChange={this.handleChange} placeholder="Where are you going?" name="destination"></input>
+      <div className="hero add-hero">
+        <div className="add-wrapper">
+          <form onSubmit={this.handleSubmit}>
+            <div className="add-container">
+              <h2 className="title">Create a Trip</h2>
+              <div className="field-dest">
+              <label className="label">Destination</label>
+                <div className="control">
+                  <input className="input"
+                    onChange={this.handleChange}
+                    placeholder="Where are you going?"
+                    name="destination"
+                  />
+                </div>
+              </div>
+              <div className="field-date">
+                <div className="control">
+                <label className="label">From</label>
+                  <input className="input"
+                    onChange={this.handleChange}
+                    name="start_date"
+                    type="date"
+                  />
+                </div>
+                <div className="control">
+                <label className="label">To</label>
+                  <input
+                    className={this.state.errors.message ? 'input is-danger' : 'input'}
+                    onChange={this.handleChange}
+                    name="end_date"
+                    type="date"
+                  />
+                </div>
+              </div>
+              {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
             </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <input className="input" onChange={this.handleChange} placeholder="From" name="start_date" type="date"></input>
+            <div className="add-buttons">
+              <button className="button edit">Create</button>
             </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <input
-              className={this.state.errors.message ? 'input is-danger' : 'input'}
-              onChange={this.handleChange}
-              placeholder="To"
-              name="end_date"
-              type="date" />
-            </div>
-            {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
-          </div>
-          <button className="button">Add Trip</button>
-        </form>
+          </form>
+        </div>
       </div>
     )
   }

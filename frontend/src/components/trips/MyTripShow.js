@@ -324,6 +324,7 @@ class MyTripShow extends React.Component {
                 handleChange={this.handlePhoto}
                 fieldName="image"
                 displayImgUp={this.state.displayImgUp}
+                preset="j4ev6wv3"
               />
               <button className="button">Pin photo</button>
             </form>

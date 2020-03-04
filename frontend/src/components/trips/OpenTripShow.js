@@ -3,6 +3,8 @@ import axios from 'axios'
 import MicrolinkCard from '@microlink/react'
 import Auth from '../../lib/auth'
 import { notify } from 'react-notify-toast'
+import TripMap from '../trips/TripMap'
+import TripWeather from '../trips/TripWeather'
 
 class OpenTripShow extends React.Component {
   state = {
@@ -86,7 +88,7 @@ class OpenTripShow extends React.Component {
   //     this.assignTrip()
   //   })
   // }
-    
+
   // assignTrip = async() => {
   //   const userId = Auth.getUser()
   //   try {
@@ -116,12 +118,12 @@ class OpenTripShow extends React.Component {
 
   generateRequest = () => {
     const tripId = parseInt(this.props.match.params.id)
-    this.setState({ requestData: { trip_requests: [ ...this.state.requestData.trip_requests, tripId ] } }, () => {
+    this.setState({ requestData: { trip_requests: [...this.state.requestData.trip_requests, tripId] } }, () => {
       this.sendRequest()
     })
   }
 
-  sendRequest = async() => {
+  sendRequest = async () => {
     const userId = Auth.getUser()
     try {
       await axios.put(`/api/${userId}/`, this.state.requestData, {
@@ -134,7 +136,7 @@ class OpenTripShow extends React.Component {
     this.getOwnerOffers()
   }
 
-  getOwnerOffers = async() => {
+  getOwnerOffers = async () => {
     const ownerId = this.state.trip.owner.id
     try {
       const { data } = await axios.get(`/api/${ownerId}`, {
@@ -153,12 +155,12 @@ class OpenTripShow extends React.Component {
 
   generateOffer = () => {
     const tripId = parseInt(this.props.match.params.id)
-    this.setState({ offerData: { trip_offers: [ ...this.state.offerData.trip_offers, tripId ] } }, () => {
+    this.setState({ offerData: { trip_offers: [...this.state.offerData.trip_offers, tripId] } }, () => {
       this.sendOffer()
     })
   }
 
-  sendOffer = async() => {
+  sendOffer = async () => {
     const ownerId = this.state.trip.owner.id
     try {
       await axios.put(`/api/${ownerId}/`, this.state.offerData, {
@@ -174,19 +176,47 @@ class OpenTripShow extends React.Component {
     const { destination, start_date, end_date } = this.state.trip
     const { photos, attractions, to_dos } = this.state
     return (
-      <div>
-        {/* {this.state.data.open_trip ? */}
-        <button onClick={this.generateRequest} className="button">Request to Join</button>
-        {/* //   :
-        //   <button onClick={this.toggleStatus} className="button">Open Trip</button>
-        // } */}
-        <h1>{destination}</h1>
-        <h2>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h2>
-        {photos.map(photo => <img className="board-photo" src={photo.image} key={photo.id} alt="" />)}
-        {attractions.map(attraction => <MicrolinkCard url={attraction.link} key={attraction.id} />)}
-        <ul>
-          {to_dos.map(task => <li key={task.id}>{task.to_do}</li>)}
-        </ul>
+      <div className="hero show-hero">
+        <div className="show-container">
+          <div className="button-wrapper">
+            <button onClick={this.generateRequest} className="button-join"></button>
+            <small>Request to join</small>
+          </div>
+          <div className="title-wrapper">
+            <h2>{destination}</h2>
+          </div>
+          <h3>{this.formatDate(new Date(start_date))} - {this.formatDate(new Date(end_date))}</h3>
+          <div className="columns is-mobile is-multiline">
+            <div className="column is-one-half-desktop is-fullwidth-mobile">
+              <div className="show-photos">
+                {photos.map(photo => <img className="board-photo" src={photo.image} key={photo.id} alt="" />)}
+              </div>
+              <div className="todos">
+
+                <ul>
+                  <p className="todo-header">To do...</p>
+                  {to_dos.map(task => <li key={task.id}>{task.to_do}</li>)}
+                </ul>
+              </div>
+            </div>
+            <div className="column is-one-half-desktop is-fullwidth-mobile">
+              <div className="show-links">
+                {attractions.map(attraction => <MicrolinkCard url={attraction.link} key={attraction.id} />)}
+              </div>
+
+              {destination &&
+                <div className="extras">
+                  <TripMap
+                    destination={destination}
+                  />
+                  <TripWeather
+                    destination={destination}
+                  />
+                </div>
+              }
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

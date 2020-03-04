@@ -8,8 +8,9 @@ class ImageUpload extends React.Component {
 
   handleUpload = async ({ target: { files } }) => {
     const data = new FormData()
+    const preset = this.props.preset
     data.append('file', files[0])
-    data.append('upload_preset', 'j4ev6wv3')
+    data.append('upload_preset', `${preset}`)
     const res = await axios.post('https://api.cloudinary.com/v1_1/dqrkw1z1a/image/upload', data)
     this.setState({ image: res.data.url }, () => {
       this.props.handleChange({ target: { name: this.props.fieldName, value: res.data.url } })

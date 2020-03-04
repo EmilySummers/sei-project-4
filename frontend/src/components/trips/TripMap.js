@@ -35,7 +35,7 @@ class TripMap extends React.Component {
           ref={this.myMap}
           {...this.state.viewport}
           height={'30vh'}
-          width={'30vw'}
+          width={'20vw'}
           mapStyle='mapbox://styles/mapbox/streets-v9'
           onViewportChange={viewport => this.setState({ viewport })}
           mapboxApiAccessToken={token}

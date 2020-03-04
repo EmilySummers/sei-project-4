@@ -30,12 +30,13 @@ class TripWeather extends React.Component {
   render() {
     const { main, description, icon } = this.state
     return (
-      <div>
-        <h1>Weather</h1>
-        <p>{main}</p>
-        <p>{description}</p>
-        <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="weather" />
-        <p>{this.calculateTemp()}℃</p>
+      <div className="weather">
+        {/* <h3>Current weather</h3> */}
+        <div className="main">
+          <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="weather" />
+          <p>{this.calculateTemp()}℃</p>
+        </div>
+        <p>{main} - {description}</p>
       </div>
     )
   }
