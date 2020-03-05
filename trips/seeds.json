@@ -6,8 +6,7 @@
     "destination": "Lisbon",
     "start_date": "2020-05-21",
     "end_date": "2020-05-24",
-    "open_trip": true,
-    "owner": 1
+    "open_trip": true
   }
 },
 {
@@ -17,8 +16,7 @@
     "destination": "Barcelona",
     "start_date": "2020-08-10",
     "end_date": "2020-08-24",
-    "open_trip": true,
-    "owner": 3
+    "open_trip": true
   }
 },
 {
@@ -28,9 +26,8 @@
     "destination": "Thailand",
     "start_date": "2020-10-01",
     "end_date": "2020-11-01",
-    "open_trip": true,
-    "owner": 11
-  }
+    "open_trip": true
+   }
 },
 {
   "model": "trips.trip",
@@ -39,8 +36,7 @@
     "destination": "Paris",
     "start_date": "2020-02-14",
     "end_date": "2020-02-17",
-    "open_trip": true,
-    "owner": 1
+    "open_trip": true
   }
 },
 {
@@ -50,8 +46,7 @@
     "destination": "Venice",
     "start_date": "2020-03-12",
     "end_date": "2020-03-15",
-    "open_trip": true,
-    "owner": 1
+    "open_trip": true
   }
 },
 {
@@ -61,8 +56,7 @@
     "destination": "Tokyo",
     "start_date": "2020-08-10",
     "end_date": "2020-08-29",
-    "open_trip": true,
-    "owner": 1
+    "open_trip": true
   }
 },
 {
