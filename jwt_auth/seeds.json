@@ -11,12 +11,25 @@
     "last_name": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2020-02-27T00:39:01.753Z",
+    "date_joined": "2020-02-27T00:39:01Z",
     "email": "emily@email.com",
-    "image": "https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
+    "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583276221/upload_demo/wwucvemc2hbo4chsmm1v.jpg",
     "groups": [],
     "user_permissions": [],
-    "trips": []
+    "trips": [
+      39
+    ],
+    "trip_shares": [
+      10,
+      3
+    ],
+    "trip_requests": [
+      10,
+      3
+    ],
+    "trip_offers": [
+      2
+    ]
   }
 },
 {
@@ -36,7 +49,10 @@
     "image": "",
     "groups": [],
     "user_permissions": [],
-    "trips": []
+    "trips": [],
+    "trip_shares": [],
+    "trip_requests": [],
+    "trip_offers": []
   }
 },
 {
@@ -51,12 +67,24 @@
     "last_name": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2020-02-27T11:29:05.377Z",
+    "date_joined": "2020-02-27T11:29:05Z",
     "email": "jess@email.com",
-    "image": "jess-profile-image",
+    "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583333769/upload_demo/ufmawi47vc4sycotfxo1.jpg",
     "groups": [],
     "user_permissions": [],
-    "trips": []
+    "trips": [
+      16
+    ],
+    "trip_shares": [
+      38
+    ],
+    "trip_requests": [
+      39,
+      10
+    ],
+    "trip_offers": [
+      3
+    ]
   }
 },
 {
@@ -72,11 +100,80 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2020-02-27T12:40:13Z",
-    "email": "matt@email.com",
-    "image": "matt-profile-image",
+    "email": "matt2@email.com",
+    "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583011672/ROAM/s8cfnlrlmbrqmca6xap6.jpg",
     "groups": [],
     "user_permissions": [],
-    "trips": []
+    "trips": [
+      2,
+      3
+    ],
+    "trip_shares": [
+      38
+    ],
+    "trip_requests": [
+      10
+    ],
+    "trip_offers": []
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$ZDFXliabeRN4$yGpUc3rq2qwhAkLERDfms/NBwabDH6ZMLathay3tyz8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Kirsty",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-02-29T14:28:09Z",
+    "email": "kirsty@email.com",
+    "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583085573/ROAM/yjnmmz28nbg3o74betgw.jpg",
+    "groups": [],
+    "user_permissions": [],
+    "trips": [
+      2,
+      3
+    ],
+    "trip_shares": [
+      38,
+      2,
+      3
+    ],
+    "trip_requests": [],
+    "trip_offers": [
+      10
+    ]
+  }
+},
+{
+  "model": "jwt_auth.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$9dpG7jqRgMxc$86nRhAiJYh1R16SfsISa1PtDjK9AZNjXwzCjBGOKKag=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "adrian1",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-03-04T15:28:21.222Z",
+    "email": "adrian@email.com",
+    "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583335682/upload_demo/qx2uiqswhwsey6rvrzsk.jpg",
+    "groups": [],
+    "user_permissions": [],
+    "trips": [],
+    "trip_shares": [
+      41
+    ],
+    "trip_requests": [
+      2
+    ],
+    "trip_offers": []
   }
 }
 ]
