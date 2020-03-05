@@ -51,7 +51,7 @@ class TripMap extends React.Component {
           mapRef={this.myMap}
           mapboxApiAccessToken={token}
           onViewportChange={viewport => this.setState({ viewport })}
-          position="bottom-right"
+          // position="bottom-right"
         />
       </>
     )

@@ -146,7 +146,7 @@ class MyNotifications extends React.Component {
             <h2>Notifications</h2>
             {this.state.tripData.trip_shares.length < 1 && this.state.tripData.trip_offers.length < 1
               ?
-              <h2>You have no notifications</h2>
+              <h3>You have no notifications</h3>
               :
               <div className="wrapper">
                 {this.state.tripData.trip_shares.length > 0 &&

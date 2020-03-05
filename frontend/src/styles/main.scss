@@ -509,29 +509,49 @@ div .show-hero {
           .button-open {
             width: 100px;
             height: 100px;
-            background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583322182/ROAM/output-onlinepngtools_10_qljuqe.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583322182/ROAM/output-onlinepngtools_10_qljuqe.png');
+            // background-size: contain;
+            // background-repeat: no-repeat;
+            // background-position: center;
             background-color: $navbar;
             padding: 10px;
             margin: 10px 20px 0 20px;
             border: none;
             border-radius: 10px;
+
+            img {
+              height: 50px;
+            }
+
+            p {
+              color: white;
+              font-size: 14px;
+              margin-top: 5px;
+            }
           }
   
           .button-close {
             width: 100px;
             height: 100px;
-            background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583322182/ROAM/output-onlinepngtools_10_copy_qawmqh.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            // background-image: url('https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583322182/ROAM/output-onlinepngtools_10_copy_qawmqh.png');
+            // background-size: contain;
+            // background-repeat: no-repeat;
+            // background-position: center;
             padding: 10px;
             background-color: $navbar;
             margin: 10px 20px 0 20px;
             border: none;
             border-radius: 10px;
+
+            img {
+              height: 50px;
+            }
+
+            p {
+              color: white;
+              font-size: 14px;
+              margin-top: 5px;
+            }
           }
         }
 
@@ -1061,6 +1081,12 @@ input:checked + .slider:before {
     align-items: center; 
     // padding: 40px 0; 
 
+    h3 {
+      margin-top: 30px;
+      font-size: 20px;
+      color: $navbar;
+    }
+
     .wrapper {
       padding: 30px;
     }
@@ -1159,6 +1185,30 @@ div .index-hero {
   }
 }
 }
+
+.edit-date-container {
+  display: flex;
+  justify-content: center;
+
+  .edit-dates {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      background-color: $yellow;
+      border: none;
+    }
+  }
+}
+
+.closed-board-photo {
+  height: 200px;
+  border: 2px solid white;
+  margin: 8px;
+}
+
+
 
 
 

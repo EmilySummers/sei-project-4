@@ -283,13 +283,17 @@ class MyTripShow extends React.Component {
             </form>
             {this.state.data.open_trip ?
               <div className="open-wrapper">
-                <button onClick={this.toggleStatus} className="button-close">Close Trip</button>
-                <small>Public / Private</small>
+                <button onClick={this.toggleStatus} className="button-close">
+                  <img src="https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583322182/ROAM/output-onlinepngtools_10_copy_qawmqh.png" alt="open" />
+                  <p>Public</p>
+                </button>
               </div>
               :
               <div className="open-wrapper">
-                <button onClick={this.toggleStatus} className="button-open"></button>
-                <small>Public / Private</small>
+                <button onClick={this.toggleStatus} className="button-open">
+                  <img src="https://res.cloudinary.com/dqrkw1z1a/image/upload/v1583322182/ROAM/output-onlinepngtools_10_qljuqe.png" alt="open" />
+                  <p>Private</p>
+                </button>
               </div>
             }
           </div>
@@ -302,25 +306,27 @@ class MyTripShow extends React.Component {
               <button className="date-button" onClick={this.toggleEdit}>✎</button>
             </div>
             :
-            <form onSubmit={this.editDates}>
-              <div className="field">
-                <div className="control">
-                  <input className="input" onChange={this.handleChangeEdit} placeholder="From" name="start_date" type="date"></input>
+            <div className="edit-date-container">
+              <form onSubmit={this.editDates} className="edit-dates">
+                <div className="field">
+                  <div className="control">
+                    <input className="input" onChange={this.handleChangeEdit} placeholder="From" name="start_date" type="date"></input>
+                  </div>
                 </div>
-              </div>
-              <div className="field">
-                <div className="control">
-                  <input
-                    className={this.state.errors.message ? 'input is-danger' : 'input'}
-                    onChange={this.handleChangeEdit}
-                    placeholder="To"
-                    name="end_date"
-                    type="date" />
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className={this.state.errors.message ? 'input is-danger' : 'input'}
+                      onChange={this.handleChangeEdit}
+                      placeholder="To"
+                      name="end_date"
+                      type="date" />
+                  </div>
+                  {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
                 </div>
-                {this.state.errors.message && <small className="help is-danger">{this.state.errors.message}</small>}
-              </div>
-              <button className="button">Save changes</button>
-            </form>
+                <button className="button">Save changes</button>
+              </form>
+            </div>
           }
           <div className="columns is-mobile is-multiline">
             <div className="column is-one-half-desktop is-fullwidth-mobile">

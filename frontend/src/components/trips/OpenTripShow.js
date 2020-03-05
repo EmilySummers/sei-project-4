@@ -188,7 +188,7 @@ class OpenTripShow extends React.Component {
           <div className="columns is-mobile is-multiline">
             <div className="column is-one-half-desktop is-fullwidth-mobile">
               <div className="show-photos">
-                {photos.map(photo => <img className="board-photo" src={photo.image} key={photo.id} alt="" />)}
+                {photos.map(photo => <img className="closed-board-photo" src={photo.image} key={photo.id} alt="" />)}
               </div>
               <div className="todos">
 
