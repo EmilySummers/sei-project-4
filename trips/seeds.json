@@ -66,28 +66,6 @@
   }
 },
 {
-  "model": "trips.trip",
-  "pk": 40,
-  "fields": {
-    "destination": "Thailand",
-    "start_date": "2020-05-07",
-    "end_date": "2020-06-10",
-    "open_trip": false,
-    "owner": 1
-  }
-},
-{
-  "model": "trips.trip",
-  "pk": 41,
-  "fields": {
-    "destination": "Venice",
-    "start_date": "1018-11-11",
-    "end_date": "2019-12-11",
-    "open_trip": true,
-    "owner": 14
-  }
-},
-{
   "model": "trips.photo",
   "pk": 8,
   "fields": {
@@ -433,66 +411,10 @@
 },
 {
   "model": "trips.todo",
-  "pk": 52,
-  "fields": {
-    "to_do": "Explore Alfama District",
-    "trip": 39
-  }
-},
-{
-  "model": "trips.todo",
-  "pk": 53,
-  "fields": {
-    "to_do": "Ride Tram 28",
-    "trip": 39
-  }
-},
-{
-  "model": "trips.todo",
-  "pk": 54,
-  "fields": {
-    "to_do": "Ride Tram 28",
-    "trip": 39
-  }
-},
-{
-  "model": "trips.todo",
-  "pk": 55,
-  "fields": {
-    "to_do": "TEST 4",
-    "trip": 39
-  }
-},
-{
-  "model": "trips.todo",
-  "pk": 56,
-  "fields": {
-    "to_do": "HAVE FUN!",
-    "trip": 40
-  }
-},
-{
-  "model": "trips.todo",
-  "pk": 58,
-  "fields": {
-    "to_do": "Go crazy!",
-    "trip": 39
-  }
-},
-{
-  "model": "trips.todo",
   "pk": 59,
   "fields": {
-    "to_do": "Ride Tram 28",
+    "to_do": "See the Olympics",
     "trip": 39
-  }
-},
-{
-  "model": "trips.todo",
-  "pk": 60,
-  "fields": {
-    "to_do": "Ride Tram 28",
-    "trip": 40
   }
 }
 ]
