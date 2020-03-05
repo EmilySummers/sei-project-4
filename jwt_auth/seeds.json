@@ -15,11 +15,7 @@
       "email": "emily@email.com",
       "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583276221/upload_demo/wwucvemc2hbo4chsmm1v.jpg",
       "groups": [],
-      "user_permissions": [],
-      "trips": [],
-      "trip_shares": [],
-      "trip_requests": [],
-      "trip_offers": []
+      "user_permissions": []
     }
   },
   {
@@ -38,11 +34,7 @@
       "email": "admin@email.com",
       "image": "",
       "groups": [],
-      "user_permissions": [],
-      "trips": [],
-      "trip_shares": [],
-      "trip_requests": [],
-      "trip_offers": []
+      "user_permissions": []
     }
   },
   {
@@ -61,11 +53,7 @@
       "email": "jess@email.com",
       "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583333769/upload_demo/ufmawi47vc4sycotfxo1.jpg",
       "groups": [],
-      "user_permissions": [],
-      "trips": [],
-      "trip_shares": [],
-      "trip_requests": [],
-      "trip_offers": []
+      "user_permissions": []
     }
   },
   {
@@ -84,11 +72,7 @@
       "email": "matt2@email.com",
       "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583011672/ROAM/s8cfnlrlmbrqmca6xap6.jpg",
       "groups": [],
-      "user_permissions": [],
-      "trips": [],
-      "trip_shares": [],
-      "trip_requests": [],
-      "trip_offers": []
+      "user_permissions": []
     }
   },
   {
@@ -107,11 +91,7 @@
       "email": "kirsty@email.com",
       "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583085573/ROAM/yjnmmz28nbg3o74betgw.jpg",
       "groups": [],
-      "user_permissions": [],
-      "trips": [],
-      "trip_shares": [],
-      "trip_requests": [],
-      "trip_offers": []
+      "user_permissions": []
     }
   }
   ]
