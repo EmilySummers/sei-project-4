@@ -138,13 +138,12 @@ class MyNotifications extends React.Component {
   }
 
   render() {
-    console.log(this.state.tripData.trip_offers)
     return (
       <div className="hero profile-hero">
         <div className="note-wrapper">
           <div className="note-container">
             <h2>Notifications</h2>
-            {this.state.tripData.trip_shares.length < 1 && this.state.tripData.trip_offers.length < 1
+            {this.state.tripData.trip_shares.length < 1 && this.state.trip_offers.trip_offers.length < 1
               ?
               <h3>You have no notifications</h3>
               :
@@ -157,8 +156,8 @@ class MyNotifications extends React.Component {
                       <button onClick={() => this.joinTrip(trip_share.id)}>Join</button>
                     </div>
                   ))}
-                {this.state.tripData.trip_offers.length > 0 &&
-                  this.state.tripData.trip_offers.map((trip_offer, i) => (
+                {this.state.tripData.trip_offers.trip_offers.length > 0 &&
+                  this.state.tripData.trip_offers.trip_offers.map((trip_offer, i) => (
                     <div className="note-wrap" key={i}>
                       {/* {trip_share.photos[0] ? <img src={trip_share.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />} */}
                       <p>... has requested to join your trip to {trip_offer.destination} on {this.formatDate(new Date(trip_offer.start_date))}</p>
