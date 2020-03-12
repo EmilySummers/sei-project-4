@@ -7,7 +7,7 @@
     "start_date": "2020-05-21",
     "end_date": "2020-05-24",
     "open_trip": true,
-    "owner": null
+    "owner": 1
   }
 },
 {
@@ -18,7 +18,7 @@
     "start_date": "2020-08-10",
     "end_date": "2020-08-24",
     "open_trip": true,
-    "owner": null
+    "owner": 3
   }
 },
 {
@@ -29,7 +29,7 @@
     "start_date": "2020-10-01",
     "end_date": "2020-11-01",
     "open_trip": true,
-    "owner": null
+    "owner": 11
   }
 },
 {
@@ -40,7 +40,7 @@
     "start_date": "2020-02-14",
     "end_date": "2020-02-17",
     "open_trip": true,
-    "owner": null
+    "owner": 1
   }
 },
 {
@@ -51,7 +51,7 @@
     "start_date": "2020-03-12",
     "end_date": "2020-03-15",
     "open_trip": true,
-    "owner": null
+    "owner": 1
   }
 },
 {
@@ -62,7 +62,7 @@
     "start_date": "2020-08-10",
     "end_date": "2020-08-29",
     "open_trip": true,
-    "owner": null
+    "owner": 1
   }
 },
 {
@@ -214,6 +214,14 @@
   "pk": 19,
   "fields": {
     "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583333610/ROAM/qnjolp7yerlsdnkif8n6.jpg",
+    "trip": 2
+  }
+},
+{
+  "model": "trips.photo",
+  "pk": 20,
+  "fields": {
+    "image": "http://res.cloudinary.com/dqrkw1z1a/image/upload/v1583684748/ROAM/xr137jo0r0sxdigudnjo.jpg",
     "trip": 2
   }
 },
