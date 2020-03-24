@@ -18,7 +18,7 @@ class ImageUpload extends React.Component {
   }
 
   render() {
-    const labelClass = this.props.labelClassName ? this.props.labelClassName : 'default_class'
+    // const labelClass = this.props.labelClassName ? this.props.labelClassName : 'default_class'
     const displayImgUp = this.props.displayImgUp
     const { image } = this.state
     return (

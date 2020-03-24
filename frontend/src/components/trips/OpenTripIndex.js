@@ -25,7 +25,7 @@ class OpenTripIndex extends React.Component {
       })
       const tripsNotAttending = openTrips.filter(trip => {
         let singleTrip = ''
-        const attending = trip.attendees.filter(attendee => {
+        trip.attendees.filter(attendee => {
           if (attendee.id === Auth.getUser()) {
             singleTrip = 'attending'
           }

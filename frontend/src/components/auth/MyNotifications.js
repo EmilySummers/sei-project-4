@@ -10,11 +10,11 @@ class MyNotifications extends React.Component {
       trip_shares: [],
       trip_offers: []
     },
-    offerData: {
+    requestData: {
       trips: [],
       trip_requests: []
     },
-    trip_offers: {
+    offerData: {
       trip_offers: []
     },
     errors: {}
@@ -29,7 +29,7 @@ class MyNotifications extends React.Component {
       const filteredIds = data.trips.map(trip => {
         return trip.id
       })
-      this.setState({ tripData: { trips: [...filteredIds], trip_shares: data.trip_shares, trip_offers: data.trip_offers }, trip_offers: { trip_offers: data.trip_offers } })
+      this.setState({ tripData: { trips: [...filteredIds], trip_shares: data.trip_shares, trip_offers: data.trip_offers }, offerData: { trip_offers: data.trip_offers } })
     } catch (err) {
       console.log(err)
     }
@@ -79,7 +79,7 @@ class MyNotifications extends React.Component {
       const removedCurrentRequest = filteredRequestIds.filter(tripRequestId => {
         return tripRequestId !== tripId
       })
-      this.setState({ offerData: { trips: [...filteredTripIds, tripId], trip_requests: [...removedCurrentRequest] } }, () => {
+      this.setState({ requestData: { trips: [...filteredTripIds, tripId], trip_requests: [...removedCurrentRequest] } }, () => {
         this.acceptOffer(tripId)
       })
     } catch (err) {
@@ -90,7 +90,7 @@ class MyNotifications extends React.Component {
   acceptOffer = async tripId => {
     const requestee = localStorage.getItem('requestee')
     try {
-      await axios.put(`/api/${requestee}/`, this.state.offerData, {
+      await axios.put(`/api/${requestee}/`, this.state.requestData, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       this.deleteOffer(tripId)
@@ -100,13 +100,13 @@ class MyNotifications extends React.Component {
   }
 
   deleteOffer = tripId => {
-    const filteredIds = this.state.trip_offers.trip_offers.map(trip_offer => {
+    const filteredIds = this.state.offerData.trip_offers.map(trip_offer => {
       return trip_offer.id
     })
     const removedCurrentOffer = filteredIds.filter(tripOfferId => {
       return tripOfferId !== tripId
     })
-    this.setState({ trip_offers: { trip_offers: removedCurrentOffer } }, () => {
+    this.setState({ offerData: { trip_offers: removedCurrentOffer } }, () => {
       this.completeDelete()
     })
   }
@@ -114,7 +114,7 @@ class MyNotifications extends React.Component {
   completeDelete = async () => {
     const ownerId = Auth.getUser()
     try {
-      await axios.put(`/api/${ownerId}/`, this.state.trip_offers, {
+      await axios.put(`/api/${ownerId}/`, this.state.offerData, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       notify.show('Request accepted!', 'success', 3000)
@@ -143,7 +143,7 @@ class MyNotifications extends React.Component {
         <div className="note-wrapper">
           <div className="note-container">
             <h2>Notifications</h2>
-            {this.state.tripData.trip_shares.length < 1 && this.state.trip_offers.trip_offers.length < 1
+            {this.state.tripData.trip_shares.length < 1 && this.state.tripData.trip_offers.length < 1
               ?
               <h3>You have no notifications</h3>
               :
@@ -156,8 +156,8 @@ class MyNotifications extends React.Component {
                       <button onClick={() => this.joinTrip(trip_share.id)}>Join</button>
                     </div>
                   ))}
-                {this.state.tripData.trip_offers.trip_offers.length > 0 &&
-                  this.state.tripData.trip_offers.trip_offers.map((trip_offer, i) => (
+                {this.state.tripData.trip_offers.length > 0 &&
+                  this.state.tripData.trip_offers.map((trip_offer, i) => (
                     <div className="note-wrap" key={i}>
                       {/* {trip_share.photos[0] ? <img src={trip_share.photos[0].image} alt="" /> : <img src="https://cdn4.iconfinder.com/data/icons/documents-letters-and-stationery/400/doc-14-512.png" alt="placeholder" />} */}
                       <p>... has requested to join your trip to {trip_offer.destination} on {this.formatDate(new Date(trip_offer.start_date))}</p>
