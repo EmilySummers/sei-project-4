@@ -110,12 +110,7 @@ In order to plan the back-end models and any relationships between them, I creat
 
 To visualise the layout and design of the front-end I produced the below wireframes:
 
-<img src="frontend/src/assets/wireframe-1.png" alt="wireframe-1" style="width: 200px; display: inline;">
-<img src="frontend/src/assets/wireframe-2.png" alt="wireframe-2" style="width: 200px; display: inline;">
-<img src="frontend/src/assets/wireframe-3.png" alt="wireframe-3" style="width: 200px; display: inline;">
-<img src="frontend/src/assets/wireframe-4.png" alt="wireframe-4" style="width: 200px; display: inline;">
-<img src="frontend/src/assets/wireframe-5.png" alt="wireframe-5" style="width: 200px; display: inline;">
-<img src="frontend/src/assets/wireframe-6.png" alt="wireframe-6" style="width: 200px; display: inline;">
+![wireframes](frontend/src/assets/wireframes.png)
 
 ## Featured Code
 
